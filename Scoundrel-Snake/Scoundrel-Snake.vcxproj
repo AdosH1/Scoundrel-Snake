@@ -140,6 +140,11 @@
     <ClInclude Include="Rat.hpp" />
     <ClInclude Include="Snake.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utility\Utility.vcxproj">
+      <Project>{f79a9068-3824-4dbc-a13c-16a4eb9b317e}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

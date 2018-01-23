@@ -26,7 +26,7 @@ class Snake : public IDrawable, public IGameObject
 		/* Constructors / Destructors */
 		Snake(sf::RenderWindow *renderWindow, float x, float y);
 		Snake(sf::RenderWindow *renderWindow, float x, float y, float speed, int tailLength);
-		~Snake() {};
+		~Snake();
 
 		void Draw() override;
 		void UpdateHeadTexture(int enumValue);

@@ -5,6 +5,11 @@ GameDirector::GameDirector()
 
 }
 
+GameDirector::~GameDirector()
+{
+
+}
+
 void GameDirector::AddDrawObject(IDrawable *object)
 {
 	currentDrawObjects.push_back(object);

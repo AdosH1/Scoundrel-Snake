@@ -55,6 +55,11 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y, float speed, int 
 	Tail.setTexture(GraphicsFactory::pSnakeBody);
 };
 
+Snake::~Snake() 
+{
+
+}
+
 void Snake::Draw()
 {
 	/* Draw Tail */

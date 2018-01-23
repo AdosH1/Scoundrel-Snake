@@ -13,6 +13,7 @@ public:
 	std::list<IDrawable*> currentDrawObjects;
 
 	GameDirector();
+	~GameDirector();
 
 	void AddGameObject(IGameObject *object);
 	void AddDrawObject(IDrawable *object);
