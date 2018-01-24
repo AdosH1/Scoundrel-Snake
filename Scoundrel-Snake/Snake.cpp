@@ -3,6 +3,7 @@
 #include "Snake.hpp"
 #include "GraphicsFactory.hpp"
 
+#pragma region Constructors / Destructors
 Snake::Snake(sf::RenderWindow *renderWindow, float x, float y)
 {
 	Window = renderWindow;
@@ -59,6 +60,8 @@ Snake::~Snake()
 {
 
 }
+
+#pragma endregion 
 
 void Snake::Draw()
 {

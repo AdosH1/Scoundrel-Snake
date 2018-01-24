@@ -2,6 +2,7 @@
 #include "Rat.hpp"
 #include "GraphicsFactory.hpp"
 
+#pragma region Constructors
 Rat::Rat(sf::RenderWindow *renderWindow, float x, float y)
 {
 	Window = renderWindow;
@@ -29,6 +30,7 @@ Rat::Rat(sf::RenderWindow *renderWindow, float x, float y, float speed)
 	Head.setTexture(GraphicsFactory::pRatHeadS);
 	Head.setPosition(Pos.X, Pos.Y);
 }
+#pragma endregion 
 
 void Rat::ChooseDirection() 
 {

@@ -12,6 +12,6 @@ public:
 	Rectangle(Point p1, Point p2);
 	~Rectangle();
 
-	Point MinPt;
-	Point MaxPt;
+	Point Min;
+	Point Max;
 };

@@ -9,6 +9,16 @@ double Geometry::DistanceBetweenTwoPoints(Point p1, Point p2)
 	return sqrt((diffX * diffX) + (diffY * diffY));
 }
 
+Point Geometry::PointDifference(Point p1, Point p2)
+{
+	Point p3 = p1 - p2;
+	p3.X = abs(p3.X);
+	p3.Y = abs(p3.Y);
+
+	return p3;
+}
+
+
 bool Geometry::ContactCircleAndRectangle(Point circleCenter, double radius, Point minRect, Point maxRect)
 {
 	// Rough check assuming circle is a rectangle (to save on computation power)
@@ -59,18 +69,18 @@ bool Geometry::ContactCircleAndRectangle(Circle circle, Rectangle rect)
 {
 	// Rough check assuming circle is a rectangle (to save on computation power)
 	double maxX = circle.Center.X + circle.Radius;
-	if (maxX > rect.MinPt.X) {
-		if (maxX < rect.MaxPt.X)
+	if (maxX > rect.Min.X) {
+		if (maxX < rect.Max.X)
 		{
 			double maxY = circle.Center.Y + circle.Radius;
-			if (maxY > rect.MinPt.Y) {
-				if (maxY < rect.MaxPt.Y)
+			if (maxY > rect.Min.Y) {
+				if (maxY < rect.Max.Y)
 				{
 					// Getting to this point, circle contact will only fail on the corners of the rectangle
-					if (DistanceBetweenTwoPoints(circle.Center, rect.MinPt) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, rect.MaxPt) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.MinPt.X, rect.MaxPt.Y)) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.MaxPt.X, rect.MinPt.Y)) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, rect.Min) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, rect.Max) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.Min.X, rect.Max.Y)) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.Max.X, rect.Min.Y)) < circle.Radius) return true;
 				}
 			}
 		}
@@ -96,10 +106,10 @@ bool Geometry::ContactRectangleAndRectangle(Point minRect1, Point maxRect1, Poin
 
 bool Geometry::ContactRectangleAndRectangle(Rectangle r1, Rectangle r2)
 {
-	if (r1.MinPt.X < r2.MaxPt.X) {
-		if (r1.MaxPt.X > r2.MinPt.X) {
-			if (r1.MinPt.Y < r2.MaxPt.Y) {
-				if (r1.MaxPt.Y > r2.MinPt.Y) {
+	if (r1.Min.X < r2.Max.X) {
+		if (r1.Max.X > r2.Min.X) {
+			if (r1.Min.Y < r2.Max.Y) {
+				if (r1.Max.Y > r2.Min.Y) {
 					return true;
 				}
 			}
