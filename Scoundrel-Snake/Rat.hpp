@@ -7,6 +7,7 @@
 #include "SFML/Graphics.hpp"
 #include "IGameObject.hpp"
 #include "IDrawable.hpp"
+#include "../Utility/Point.hpp"
 
 class Rat : public IGameObject, public IDrawable
 {
@@ -16,7 +17,7 @@ class Rat : public IGameObject, public IDrawable
 		~Rat() {};
 
 		sf::RenderWindow *Window;
-        sf::Vector2<float> Pos;
+        Point Pos;
 		sf::CircleShape Head;
 		float Speed;
 		
@@ -39,5 +40,5 @@ class Rat : public IGameObject, public IDrawable
 		void Move();
 
 		// deprecated functions - please rewrite
-		int checkhit(sf::Vector2f s_pos, const int s_r, std::deque<float> x, std::deque<float> y, const int t_r);
+		//int checkhit(sf::Vector2f s_pos, const int s_r, std::deque<float> x, std::deque<float> y, const int t_r);
 };

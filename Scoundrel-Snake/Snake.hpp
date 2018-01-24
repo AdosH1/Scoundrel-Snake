@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "IDrawable.hpp"
 #include "IGameObject.hpp"
+#include "../Utility/Point.hpp"
 
 class Snake : public IDrawable, public IGameObject
 {
@@ -12,9 +13,9 @@ class Snake : public IDrawable, public IGameObject
 		sf::RenderWindow *Window;
 
 		/* Current head position */
-        sf::Vector2<float> Pos;
+        Point Pos;
 		/* A deque of all tail positions */
-		std::deque<sf::Vector2<float>> TailPos;
+		std::deque<Point> TailPos;
 		/* Snake speed in pixels */
         float Speed;
 	    /* The number of tail segments the snake will have */
@@ -41,7 +42,7 @@ class Snake : public IDrawable, public IGameObject
 		const int TailSegmentDistance = 2;
 		int TailSegmentCounter = 0;
 
-        sf::Vector2<double> LastPos;
+        Point LastPos;
 
 
 };

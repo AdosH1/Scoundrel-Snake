@@ -7,23 +7,23 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y)
 {
 	Window = renderWindow;
 
-	Pos.x = x + HeadRadius;
-	Pos.y = y + HeadRadius;
+	Pos.X = x + HeadRadius;
+	Pos.Y = y + HeadRadius;
 	Speed = 4;
 	TailLength = 6;
 
 	for (int i = 0; i < TailLength; ++i) 
 	{
-		TailPos.push_back(sf::Vector2<float>(-10, -10));
+		TailPos.push_back(Point(-10,-10));
 	}
 
-	LastPos.x = -10;
-	LastPos.y = -10;
+	LastPos.X = -10;
+	LastPos.Y = -10;
 
 	/* Initialise Graphics */
 	Head = sf::CircleShape(HeadRadius);
 	Head.setTexture(GraphicsFactory::pSnakeHeadS);
-	Head.setPosition(Pos.x, Pos.y);
+	Head.setPosition(Pos.X, Pos.Y);
 
 	Tail = sf::CircleShape(TailRadius);
 	Tail.setTexture(GraphicsFactory::pSnakeBody);
@@ -33,23 +33,23 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y, float speed, int 
 {
 	Window = renderWindow;
 
-    Pos.x = x + HeadRadius;
-    Pos.y = y + HeadRadius;
+    Pos.X = x + HeadRadius;
+    Pos.Y = y + HeadRadius;
     Speed = speed;
     TailLength = tailLength;
 
     for (int i = 0; i < TailLength; ++i) 
 	{
-        TailPos.push_back(sf::Vector2<float>(0,0));
+        TailPos.push_back(Point(0,0));
     }
 
-    LastPos.x = -10;
-    LastPos.y = -10;
+    LastPos.X = -10;
+    LastPos.Y = -10;
 
 	/* Initialise Graphics */
 	Head = sf::CircleShape(HeadRadius);
 	Head.setTexture(GraphicsFactory::pSnakeHeadS);
-	Head.setPosition(Pos.x, Pos.y);
+	Head.setPosition(Pos.X, Pos.Y);
 
 	Tail = sf::CircleShape(TailRadius);
 	Tail.setTexture(GraphicsFactory::pSnakeBody);
@@ -66,11 +66,11 @@ void Snake::Draw()
 	for (int i = 0; i < TailLength; i++)
 	{
 		//TODO: figure out why we need a 2.0f offset to draw tail correctly
-		Tail.setPosition(TailPos[i].x + 2.0f, TailPos[i].y + 2.0f);
+		Tail.setPosition(TailPos[i].X + 2.0f, TailPos[i].Y + 2.0f);
 		Window->draw(Tail);
 	}
 	/* Draw Head */
-	Head.setPosition(Pos.x, Pos.y);
+	Head.setPosition(Pos.X, Pos.Y);
 	Window->draw(Head);
 }
 
@@ -113,7 +113,7 @@ void Snake::UpdateHeadTexture(int enumValue)
 // Make the tail 'length' segments longer
 void Snake::Lengthen(int length) 
 {
-    sf::Vector2<float> pos(-10,-10);
+	Point pos = Point(-10, -10);
 
     for (int i = 0; i < length; ++i) {
         TailPos.push_back(pos);
@@ -125,7 +125,7 @@ bool Snake::TailHitByHead()
 {
     for (int i = 18; i < TailPos.size(); i++)
     {
-        float distance = sqrt(pow(TailPos.at(i).x - Pos.x, 2) + pow(TailPos.at(i).y - Pos.y, 2));
+        float distance = sqrt(pow(TailPos.at(i).X - Pos.X, 2) + pow(TailPos.at(i).Y - Pos.Y, 2));
         if (distance < (HeadRadius + TailRadius)) return true;
     }
     return false;
