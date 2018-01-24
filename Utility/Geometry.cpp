@@ -32,6 +32,52 @@ bool Geometry::ContactCircleAndRectangle(Point circleCenter, double radius, Poin
 	return false;
 }
 
+bool Geometry::ContactCircleAndRectangle(Circle circle, Point minRect, Point maxRect)
+{
+	// Rough check assuming circle is a rectangle (to save on computation power)
+	double maxX = circle.Center.X + circle.Radius;
+	if (maxX > minRect.X) {
+		if (maxX < maxRect.X)
+		{
+			double maxY = circle.Center.Y + circle.Radius;
+			if (maxY > minRect.Y) {
+				if (maxY < maxRect.Y)
+				{
+					// Getting to this point, circle contact will only fail on the corners of the rectangle
+					if (DistanceBetweenTwoPoints(circle.Center, minRect) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, maxRect) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(minRect.X, maxRect.Y)) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(maxRect.X, minRect.Y)) < circle.Radius) return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+bool Geometry::ContactCircleAndRectangle(Circle circle, Rectangle rect)
+{
+	// Rough check assuming circle is a rectangle (to save on computation power)
+	double maxX = circle.Center.X + circle.Radius;
+	if (maxX > rect.MinPt.X) {
+		if (maxX < rect.MaxPt.X)
+		{
+			double maxY = circle.Center.Y + circle.Radius;
+			if (maxY > rect.MinPt.Y) {
+				if (maxY < rect.MaxPt.Y)
+				{
+					// Getting to this point, circle contact will only fail on the corners of the rectangle
+					if (DistanceBetweenTwoPoints(circle.Center, rect.MinPt) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, rect.MaxPt) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.MinPt.X, rect.MaxPt.Y)) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.MaxPt.X, rect.MinPt.Y)) < circle.Radius) return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
 // This is an implementation of Axis Aligned Bounding Box (AABB) collision
 // as seen in https://www.youtube.com/watch?v=1oNsZCqQDeE
 bool Geometry::ContactRectangleAndRectangle(Point minRect1, Point maxRect1, Point minRect2, Point maxRect2)
