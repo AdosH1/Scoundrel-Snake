@@ -2,6 +2,8 @@
 #include <iostream>
 
 /* Declarations - these must be included for static references*/
+sf::Texture *GraphicsFactory::pBorderTexture;
+
 sf::Texture *GraphicsFactory::pSnakeHeadN;
 sf::Texture *GraphicsFactory::pSnakeHeadE;
 sf::Texture *GraphicsFactory::pSnakeHeadS;
@@ -62,7 +64,7 @@ void GraphicsFactory::LoadBoard()
     //Please note:
     //The border texture is simply rotated to fit the screen size
 
-    BorderTop.setSize(BorderSize);
+    /*BorderTop.setSize(BorderSize);
     BorderTop.setTexture(pBorderTexture);
 
     BorderLeft.setSize(BorderSize);
@@ -77,7 +79,7 @@ void GraphicsFactory::LoadBoard()
     BorderRight.setSize(BorderSize);
     BorderRight.setTexture(pBorderTexture);
     BorderRight.setPosition((float)WindowSize.x,0);
-    BorderRight.rotate(90);
+    BorderRight.rotate(90);*/
 }
 
 void GraphicsFactory::LoadSnake()

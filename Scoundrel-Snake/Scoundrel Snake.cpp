@@ -38,6 +38,10 @@ int main()
 
 	Snake *s = Game->CreateSnake(&Window, 10, 10);
 	Rat *r = Game->CreateRat(&Window, 300, 300);
+	Game->CreateWall(&Window, Rectangle(Point(0, 0), Point(15, 600)));
+	Game->CreateWall(&Window, Rectangle(Point(15, 0), Point(600, 15)));
+	Game->CreateWall(&Window, Rectangle(Point(585, 15), Point(600, 600)));
+	Game->CreateWall(&Window, Rectangle(Point(15, 585), Point(585, 600)));
 
 	while (Window.isOpen())
 	{

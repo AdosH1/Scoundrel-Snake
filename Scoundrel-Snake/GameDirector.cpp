@@ -26,6 +26,7 @@ void GameDirector::DrawGameObjects()
 	{
 		if (Snake *snake = dynamic_cast<Snake*>(object)) snake->Draw();
 		if (Rat *rat = dynamic_cast<Rat*>(object)) rat->Draw();
+		if (Wall *wall = dynamic_cast<Wall*>(object)) wall->Draw();
 	}
 }
 
@@ -54,6 +55,16 @@ Snake* GameDirector::CreateSnake(sf::RenderWindow *renderWindow, float x, float 
 
 	return s;
 }
+
+Wall* GameDirector::CreateWall(sf::RenderWindow* renderWindow, Rectangle rect)
+{
+	Wall *w = new Wall(renderWindow, rect);
+	currentGameObjects.push_back(w);
+	currentDrawObjects.push_back(w);
+
+	return w;
+}
+
 
 void GameDirector::Remove(IObject *object)
 {

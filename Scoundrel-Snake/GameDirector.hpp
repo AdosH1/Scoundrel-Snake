@@ -5,6 +5,7 @@
 #include "Snake.hpp"
 #include "Rat.hpp"
 #include <vector>
+#include "Wall.hpp"
 
 class GameDirector
 {
@@ -22,6 +23,7 @@ public:
 
 	Rat* CreateRat(sf::RenderWindow *renderWindow, float x, float y);
 	Snake* CreateSnake(sf::RenderWindow *renderWindow, float x, float y);
+	Wall* CreateWall(sf::RenderWindow *renderWindow, Rectangle rect);
 
 	void Reset();
 	void Remove(IObject *object);

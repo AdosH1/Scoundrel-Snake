@@ -28,7 +28,7 @@ class GraphicsFactory
     sf::RectangleShape BorderBottom;
     sf::RectangleShape BorderRight;
     sf::Texture BorderTexture;
-    sf::Texture *pBorderTexture;
+    static sf::Texture *pBorderTexture;
     sf::Sprite FloorSprite;
     sf::Texture FloorTexture;
 
