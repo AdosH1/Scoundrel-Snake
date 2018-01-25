@@ -11,6 +11,7 @@ class GameDirector
 {
 public:
 	std::list<IGameObject*> currentGameObjects;
+	std::list<IEnvironmentObject*> currentEnvironmentObjects;
 	std::list<IDrawable*> currentDrawObjects;
 
 	GameDirector();
@@ -19,11 +20,13 @@ public:
 	void AddGameObject(IGameObject *object);
 	void AddDrawObject(IDrawable *object);
 	void DrawGameObjects();
-	void GameTurn();
 
 	Rat* CreateRat(sf::RenderWindow *renderWindow, float x, float y);
 	Snake* CreateSnake(sf::RenderWindow *renderWindow, float x, float y);
 	Wall* CreateWall(sf::RenderWindow *renderWindow, Rectangle rect);
+
+	void GameTurn();
+	void Referee();
 
 	void Reset();
 	void Remove(IObject *object);

@@ -14,6 +14,10 @@ class Snake : public IDrawable, public IGameObject
 
 		/* Current head position */
         Point Pos;
+		const double HeadRadius = 8;
+		const double TailRadius = 6;
+		Point LastPos;
+
 		/* A deque of all tail positions */
 		std::deque<Point> TailPos;
 		/* Snake speed in pixels */
@@ -36,13 +40,9 @@ class Snake : public IDrawable, public IGameObject
 		void UpdateTail();
 
     private:
-        const float HeadRadius = 8;
-        const float TailRadius = 6;
 		/* The distance between each tail segment (in pixels (roughly) ) */
 		const int TailSegmentDistance = 2;
 		int TailSegmentCounter = 0;
-
-        Point LastPos;
 
 
 };

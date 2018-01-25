@@ -2,10 +2,10 @@
 
 #include "SFML/Graphics.hpp"
 #include "IDrawable.hpp"
-#include "IGameObject.hpp"
 #include "../Utility/Rectangle.hpp"
+#include "IEnvironmentObject.hpp"
 
-class Wall : public IGameObject, public IDrawable
+class Wall : public IEnvironmentObject, public IDrawable
 {
 public:
 	Wall(sf::RenderWindow* renderWindow, sf::Texture* texture = NULL);

@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "GameDirector.hpp"
+#include "../Utility/Geometry.hpp"
+
 GameDirector::GameDirector()
 {
 
@@ -30,12 +32,35 @@ void GameDirector::DrawGameObjects()
 	}
 }
 
+void GameDirector::Referee()
+{
+	for (IGameObject *object : currentGameObjects)
+	{
+		#pragma region Snake
+		if (Snake *snake = dynamic_cast<Snake*>(object))
+		{
+			for (IEnvironmentObject *env : currentEnvironmentObjects)
+			{
+				if (Wall *wall = dynamic_cast<Wall*>(env))
+				{
+					if (Geometry::ContactCircleAndRectangle(snake->Pos, snake->HeadRadius, wall->Geo))
+						snake->Pos = snake->LastPos;
+				}
+			}
+		}
+		#pragma endregion 
+	}
+}
+
+// Plays all non-player moves and referees the game
 void GameDirector::GameTurn()
 {
 	for (IGameObject *object : currentGameObjects)
 	{
 		if (Rat *rat = dynamic_cast<Rat*>(object)) rat->PlayTurn();
 	}
+	
+	Referee();
 }
 
 Rat* GameDirector::CreateRat(sf::RenderWindow *renderWindow, float x, float y)
@@ -59,7 +84,7 @@ Snake* GameDirector::CreateSnake(sf::RenderWindow *renderWindow, float x, float 
 Wall* GameDirector::CreateWall(sf::RenderWindow* renderWindow, Rectangle rect)
 {
 	Wall *w = new Wall(renderWindow, rect);
-	currentGameObjects.push_back(w);
+	currentEnvironmentObjects.push_back(w);
 	currentDrawObjects.push_back(w);
 
 	return w;

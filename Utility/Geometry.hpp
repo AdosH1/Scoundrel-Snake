@@ -13,6 +13,7 @@ public:
 	static Point PointDifference(Point p1, Point p2);
 
 	static bool ContactCircleAndRectangle(Point circleCenter, double radius, Point minRect, Point maxRect);
+	static bool ContactCircleAndRectangle(Point circleCenter, double radius, Rectangle rect);
 	static bool ContactCircleAndRectangle(Circle circle, Point minRect, Point maxRect);
 	static bool ContactCircleAndRectangle(Circle circle, Rectangle rect);
 

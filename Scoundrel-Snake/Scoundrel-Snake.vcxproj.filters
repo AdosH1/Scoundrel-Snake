@@ -77,5 +77,8 @@
     <ClInclude Include="Wall.hpp">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="IEnvironmentObject.hpp">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

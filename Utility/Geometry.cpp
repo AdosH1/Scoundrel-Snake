@@ -31,15 +31,54 @@ bool Geometry::ContactCircleAndRectangle(Point circleCenter, double radius, Poin
 				if (maxY < maxRect.Y) 
 				{
 					// Getting to this point, circle contact will only fail on the corners of the rectangle
-					if (DistanceBetweenTwoPoints(circleCenter, minRect) < radius) return true;
-					if (DistanceBetweenTwoPoints(circleCenter, maxRect) < radius) return true;
-					if (DistanceBetweenTwoPoints(circleCenter, Point(minRect.X, maxRect.Y)) < radius) return true;
-					if (DistanceBetweenTwoPoints(circleCenter, Point(maxRect.X, minRect.Y)) < radius) return true;
+					if (DistanceBetweenTwoPoints(circleCenter, minRect) > radius) return false;
+					if (DistanceBetweenTwoPoints(circleCenter, maxRect) > radius) return false;
+					if (DistanceBetweenTwoPoints(circleCenter, Point(minRect.X, maxRect.Y)) > radius) return false;
+					if (DistanceBetweenTwoPoints(circleCenter, Point(maxRect.X, minRect.Y)) > radius) return false;
+					return true;
 				}
 			}
 		}
 	}
 	return false;
+}
+
+bool Geometry::ContactCircleAndRectangle(Point circleCenter, double radius, Rectangle rect)
+{
+	double distX = abs(circleCenter.X - rect.Center.X);
+	double distY = abs(circleCenter.Y - rect.Center.Y);
+	double halfHeight = rect.Height / 2;
+	double halfWidth = rect.Width / 2;
+
+	if (distX > halfWidth + radius) return false;
+	if (distY > halfHeight + radius) return false;
+
+	if (distX <= halfWidth) return true;
+	if (distY <= halfHeight) return true;
+
+	double distCorner = pow((distX - halfWidth), 2) + pow(distY - halfHeight,2);
+	return distCorner < pow(radius, 2);
+
+	//double maxX = circleCenter.X + radius;
+	//double minX = circleCenter.X - radius;
+	//if (maxX > rect.Min.X) {
+	//	if (maxX < rect.Max.X)
+	//	{
+	//		double maxY = circleCenter.Y + radius;
+	//		if (maxY > rect.Min.Y) {
+	//			if (maxY < rect.Max.Y)
+	//			{
+	//				// Getting to this point, circle contact will only fail on the corners of the rectangle
+	//				if (DistanceBetweenTwoPoints(circleCenter, rect.Min) > radius) return false;
+	//				if (DistanceBetweenTwoPoints(circleCenter, rect.Max) > radius) return false;
+	//				if (DistanceBetweenTwoPoints(circleCenter, Point(rect.Min.X, rect.Max.Y)) > radius) return false;
+	//				if (DistanceBetweenTwoPoints(circleCenter, Point(rect.Max.X, rect.Min.Y)) > radius) return false;
+	//				return true;
+	//			}
+	//		}
+	//	}
+	//}
+	//return false;
 }
 
 bool Geometry::ContactCircleAndRectangle(Circle circle, Point minRect, Point maxRect)
@@ -54,10 +93,11 @@ bool Geometry::ContactCircleAndRectangle(Circle circle, Point minRect, Point max
 				if (maxY < maxRect.Y)
 				{
 					// Getting to this point, circle contact will only fail on the corners of the rectangle
-					if (DistanceBetweenTwoPoints(circle.Center, minRect) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, maxRect) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, Point(minRect.X, maxRect.Y)) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, Point(maxRect.X, minRect.Y)) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, minRect) > circle.Radius) return false;
+					if (DistanceBetweenTwoPoints(circle.Center, maxRect) > circle.Radius) return false;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(minRect.X, maxRect.Y)) > circle.Radius) return false;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(maxRect.X, minRect.Y)) > circle.Radius) return false;
+					return true;
 				}
 			}
 		}
@@ -77,10 +117,11 @@ bool Geometry::ContactCircleAndRectangle(Circle circle, Rectangle rect)
 				if (maxY < rect.Max.Y)
 				{
 					// Getting to this point, circle contact will only fail on the corners of the rectangle
-					if (DistanceBetweenTwoPoints(circle.Center, rect.Min) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, rect.Max) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.Min.X, rect.Max.Y)) < circle.Radius) return true;
-					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.Max.X, rect.Min.Y)) < circle.Radius) return true;
+					if (DistanceBetweenTwoPoints(circle.Center, rect.Min) > circle.Radius) return false;
+					if (DistanceBetweenTwoPoints(circle.Center, rect.Max) > circle.Radius) return false;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.Min.X, rect.Max.Y)) > circle.Radius) return false;
+					if (DistanceBetweenTwoPoints(circle.Center, Point(rect.Max.X, rect.Min.Y)) > circle.Radius) return false;
+					return true;
 				}
 			}
 		}

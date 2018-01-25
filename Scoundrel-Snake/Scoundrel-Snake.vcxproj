@@ -135,6 +135,7 @@
     <ClInclude Include="GameDirector.hpp" />
     <ClInclude Include="GraphicsFactory.hpp" />
     <ClInclude Include="IDrawable.hpp" />
+    <ClInclude Include="IEnvironmentObject.hpp" />
     <ClInclude Include="IGameObject.hpp" />
     <ClInclude Include="IObject.hpp" />
     <ClInclude Include="PlayerControl.hpp" />

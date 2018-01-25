@@ -14,4 +14,8 @@ public:
 
 	Point Min;
 	Point Max;
+	Point Center;
+	double Width;
+	double Height;
+
 };

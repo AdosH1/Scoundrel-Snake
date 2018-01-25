@@ -59,6 +59,7 @@ void PlayerControl::processInput(Input input, Snake *snake)
 	if (input == noAction)
 		return;
 
+	snake->LastPos = snake->Pos;
 	snake->UpdateHeadTexture(input);
 	if (input == moveN) snake->Pos.Y -= snake->Speed;
 	if (input == moveE) snake->Pos.X += snake->Speed;

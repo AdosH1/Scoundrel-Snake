@@ -24,7 +24,8 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y)
 	/* Initialise Graphics */
 	Head = sf::CircleShape(HeadRadius);
 	Head.setTexture(GraphicsFactory::pSnakeHeadS);
-	Head.setPosition(Pos.X, Pos.Y);
+	//Head.setPosition(Pos.X, Pos.Y);
+	Head.setPosition(x,y);
 
 	Tail = sf::CircleShape(TailRadius);
 	Tail.setTexture(GraphicsFactory::pSnakeBody);
@@ -69,11 +70,13 @@ void Snake::Draw()
 	for (int i = 0; i < TailLength; i++)
 	{
 		//TODO: figure out why we need a 2.0f offset to draw tail correctly
-		Tail.setPosition(TailPos[i].X + 2.0f, TailPos[i].Y + 2.0f);
+		Tail.setPosition(TailPos[i].X - TailRadius, TailPos[i].Y - TailRadius);
 		Window->draw(Tail);
 	}
+
+
 	/* Draw Head */
-	Head.setPosition(Pos.X, Pos.Y);
+	Head.setPosition(Pos.X - HeadRadius, Pos.Y - HeadRadius);
 	Window->draw(Head);
 }
 
