@@ -123,6 +123,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameDirector.cpp" />
+    <ClCompile Include="GhostRectangle.cpp" />
     <ClCompile Include="GraphicsFactory.cpp" />
     <ClCompile Include="PlayerControl.cpp" />
     <ClCompile Include="Rat.cpp" />
@@ -133,6 +134,7 @@
   <ItemGroup>
     <ClInclude Include="Board.hpp" />
     <ClInclude Include="GameDirector.hpp" />
+    <ClInclude Include="GhostRectangle.hpp" />
     <ClInclude Include="GraphicsFactory.hpp" />
     <ClInclude Include="IDrawable.hpp" />
     <ClInclude Include="IEnvironmentObject.hpp" />

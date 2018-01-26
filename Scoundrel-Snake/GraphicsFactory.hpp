@@ -23,14 +23,11 @@ class GraphicsFactory
     sf::Texture SelectorTexture;
 
     // Board
-    sf::RectangleShape BorderTop;
-    sf::RectangleShape BorderLeft;
-    sf::RectangleShape BorderBottom;
-    sf::RectangleShape BorderRight;
     sf::Texture BorderTexture;
     static sf::Texture *pBorderTexture;
     sf::Sprite FloorSprite;
     sf::Texture FloorTexture;
+	static sf::Texture *pFloorTexture;
 
     // Snake
     sf::CircleShape SnakeHead;

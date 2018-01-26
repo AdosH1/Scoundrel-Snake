@@ -6,13 +6,20 @@
 #include "Rat.hpp"
 #include <vector>
 #include "Wall.hpp"
+#include "GhostRectangle.hpp"
 
 class GameDirector
 {
 public:
-	std::list<IGameObject*> currentGameObjects;
-	std::list<IEnvironmentObject*> currentEnvironmentObjects;
-	std::list<IDrawable*> currentDrawObjects;
+	static enum DrawLevel { Background = 0, Middleground = 1, Foreground = 2 };
+
+	std::list<IGameObject*> CurrentGameObjects;
+	std::list<IEnvironmentObject*> CurrentEnvironmentObjects;
+	std::list<std::list<IDrawable*>*> CurrentDrawObjects;
+
+	std::list<IDrawable*> ForegroundDrawObjects;
+	std::list<IDrawable*> MiddlegroundDrawObjects;
+	std::list<IDrawable*> BackgroundDrawObjects;
 
 	GameDirector();
 	~GameDirector();
@@ -21,9 +28,11 @@ public:
 	void AddDrawObject(IDrawable *object);
 	void DrawGameObjects();
 
-	Rat* CreateRat(sf::RenderWindow *renderWindow, float x, float y);
-	Snake* CreateSnake(sf::RenderWindow *renderWindow, float x, float y);
-	Wall* CreateWall(sf::RenderWindow *renderWindow, Rectangle rect);
+	Rat* CreateRat(sf::RenderWindow *renderWindow, float x, float y, DrawLevel drawLevel = Middleground);
+	Snake* CreateSnake(sf::RenderWindow *renderWindow, float x, float y, DrawLevel drawLevel = Middleground);
+	Wall* CreateWall(sf::RenderWindow *renderWindow, Rectangle rect, DrawLevel drawLevel = Middleground);
+
+	GhostRectangle* CreateGhostRectangle(sf::RenderWindow *renderWindow, Rectangle rect, sf::Texture* texture = NULL, DrawLevel drawLevel = Middleground, std::string name = "");
 
 	void GameTurn();
 	void Referee();

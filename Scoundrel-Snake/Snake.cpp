@@ -8,8 +8,8 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y)
 {
 	Window = renderWindow;
 
-	Pos.X = x + HeadRadius;
-	Pos.Y = y + HeadRadius;
+	Pos.X = x;
+	Pos.Y = y;
 	Speed = 4;
 	TailLength = 6;
 
@@ -24,8 +24,7 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y)
 	/* Initialise Graphics */
 	Head = sf::CircleShape(HeadRadius);
 	Head.setTexture(GraphicsFactory::pSnakeHeadS);
-	//Head.setPosition(Pos.X, Pos.Y);
-	Head.setPosition(x,y);
+	Head.setPosition(x - HeadRadius,y - HeadRadius);
 
 	Tail = sf::CircleShape(TailRadius);
 	Tail.setTexture(GraphicsFactory::pSnakeBody);
@@ -35,8 +34,8 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y, float speed, int 
 {
 	Window = renderWindow;
 
-    Pos.X = x + HeadRadius;
-    Pos.Y = y + HeadRadius;
+    Pos.X = x;
+    Pos.Y = y;
     Speed = speed;
     TailLength = tailLength;
 
@@ -51,7 +50,7 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y, float speed, int 
 	/* Initialise Graphics */
 	Head = sf::CircleShape(HeadRadius);
 	Head.setTexture(GraphicsFactory::pSnakeHeadS);
-	Head.setPosition(Pos.X, Pos.Y);
+	Head.setPosition(Pos.X - HeadRadius, Pos.Y - HeadRadius);
 
 	Tail = sf::CircleShape(TailRadius);
 	Tail.setTexture(GraphicsFactory::pSnakeBody);

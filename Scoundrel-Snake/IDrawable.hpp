@@ -6,7 +6,7 @@ class IDrawable : public IObject
 	/* This interface is meant to be inherited by objects that are able to be drawn.
 	 * The GameDirector will hold a list of drawables that will be queued to draw per frame. */
 public:
-	bool operator==(const IDrawable& lhs)
+	/*bool operator==(const IDrawable& lhs)
 	{
 		try
 		{
@@ -17,7 +17,7 @@ public:
 			return false;
 		}
 		return true;
-	}
+	}*/
 	virtual void Draw()
 	{
 		/* I don't believe the compiler accepts non-overriden virtual functions,

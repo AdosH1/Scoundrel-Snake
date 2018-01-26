@@ -14,21 +14,21 @@ Rat::Rat(sf::RenderWindow *renderWindow, float x, float y)
 	/* Initialise Graphics */
 	Head = sf::CircleShape(HeadRadius);
 	Head.setTexture(GraphicsFactory::pRatHeadS);
-	Head.setPosition(Pos.X, Pos.Y);
+	Head.setPosition(x - HeadRadius, y - HeadRadius);
 }
 
 Rat::Rat(sf::RenderWindow *renderWindow, float x, float y, float speed)
 {
 	Window = renderWindow;
 
-    Pos.X = x;
-    Pos.Y = y;
+	Pos.X = x;
+	Pos.Y = y;
     Speed = speed;
 
 	/* Initialise Graphics */
 	Head = sf::CircleShape(HeadRadius);
 	Head.setTexture(GraphicsFactory::pRatHeadS);
-	Head.setPosition(Pos.X, Pos.Y);
+	Head.setPosition(x - HeadRadius, y - HeadRadius);
 }
 #pragma endregion 
 
@@ -40,6 +40,7 @@ void Rat::ChooseDirection()
 
 void Rat::Move() 
 {
+	LastPos = Pos;
     switch(dir) 
 	{
         case 0: //STOP
@@ -74,7 +75,7 @@ void Rat::PlayTurn()
 
 void Rat::Draw()
 {
-	Head.setPosition(Pos.X, Pos.Y);
+	Head.setPosition(Pos.X - HeadRadius, Pos.Y - HeadRadius);
 	Window->draw(Head);
 }
 

@@ -22,6 +22,18 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{4a8ef213-9ee4-4cf6-95ad-e6c859dda448}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Drawables">
+      <UniqueIdentifier>{7c1864ad-537a-4738-a429-603990ed20cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EnvironmentObjects">
+      <UniqueIdentifier>{331e4b1e-b6f7-4ae8-8629-39ebcd3e4b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EnvironmentObjects">
+      <UniqueIdentifier>{3099d2ad-4de2-426e-a485-1b52b179162b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawables">
+      <UniqueIdentifier>{46b90e6e-a725-4322-9b1a-56c6692e631f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsFactory.cpp">
@@ -43,7 +55,10 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Wall.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\EnvironmentObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostRectangle.cpp">
+      <Filter>Source Files\Drawables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,11 +89,14 @@
     <ClInclude Include="IObject.hpp">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.hpp">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="IEnvironmentObject.hpp">
       <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostRectangle.hpp">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.hpp">
+      <Filter>Header Files\EnvironmentObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

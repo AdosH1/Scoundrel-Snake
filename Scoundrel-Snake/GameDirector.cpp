@@ -4,7 +4,9 @@
 
 GameDirector::GameDirector()
 {
-
+	CurrentDrawObjects.push_back(&BackgroundDrawObjects);
+	CurrentDrawObjects.push_back(&MiddlegroundDrawObjects);
+	CurrentDrawObjects.push_back(&ForegroundDrawObjects);
 }
 
 GameDirector::~GameDirector()
@@ -14,32 +16,39 @@ GameDirector::~GameDirector()
 
 void GameDirector::AddDrawObject(IDrawable *object)
 {
-	currentDrawObjects.push_back(object);
+	MiddlegroundDrawObjects.push_back(object);
 }
 
 void GameDirector::AddGameObject(IGameObject *object)
 {
-	currentGameObjects.push_back(object);
+	CurrentGameObjects.push_back(object);
 }
 
 void GameDirector::DrawGameObjects()
 {
-	for (IDrawable *object : currentDrawObjects)
+	for (std::list<IDrawable*> *drawList : CurrentDrawObjects)
 	{
-		if (Snake *snake = dynamic_cast<Snake*>(object)) snake->Draw();
-		if (Rat *rat = dynamic_cast<Rat*>(object)) rat->Draw();
-		if (Wall *wall = dynamic_cast<Wall*>(object)) wall->Draw();
+		for (IDrawable *object : *drawList)
+		{
+			if (GhostRectangle *rect = dynamic_cast<GhostRectangle*>(object)) rect->Draw();
+
+			if (Snake *snake = dynamic_cast<Snake*>(object)) snake->Draw();
+			if (Rat *rat = dynamic_cast<Rat*>(object)) rat->Draw();
+			if (Wall *wall = dynamic_cast<Wall*>(object)) wall->Draw();
+
+		}
 	}
+	
 }
 
 void GameDirector::Referee()
 {
-	for (IGameObject *object : currentGameObjects)
+	for (IGameObject *object : CurrentGameObjects)
 	{
 		#pragma region Snake
 		if (Snake *snake = dynamic_cast<Snake*>(object))
 		{
-			for (IEnvironmentObject *env : currentEnvironmentObjects)
+			for (IEnvironmentObject *env : CurrentEnvironmentObjects)
 			{
 				if (Wall *wall = dynamic_cast<Wall*>(env))
 				{
@@ -49,13 +58,28 @@ void GameDirector::Referee()
 			}
 		}
 		#pragma endregion 
+
+		#pragma region Rat
+		if (Rat *rat = dynamic_cast<Rat*>(object))
+		{
+			for (IEnvironmentObject *env : CurrentEnvironmentObjects)
+			{
+				if (Wall *wall = dynamic_cast<Wall*>(env))
+				{
+					if (Geometry::ContactCircleAndRectangle(rat->Pos, rat->HeadRadius, wall->Geo))
+						rat->Pos = rat->LastPos;
+				}
+			}
+		}
+		#pragma endregion 
+
 	}
 }
 
 // Plays all non-player moves and referees the game
 void GameDirector::GameTurn()
 {
-	for (IGameObject *object : currentGameObjects)
+	for (IGameObject *object : CurrentGameObjects)
 	{
 		if (Rat *rat = dynamic_cast<Rat*>(object)) rat->PlayTurn();
 	}
@@ -63,38 +87,58 @@ void GameDirector::GameTurn()
 	Referee();
 }
 
-Rat* GameDirector::CreateRat(sf::RenderWindow *renderWindow, float x, float y)
+Rat* GameDirector::CreateRat(sf::RenderWindow *renderWindow, float x, float y, DrawLevel drawLevel)
 {
 	Rat *r = new Rat(renderWindow, x, y);
-	currentGameObjects.push_back(r);
-	currentDrawObjects.push_back(r);
+	CurrentGameObjects.push_back(r);
+	
+	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(r);
+	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(r);
+	if (drawLevel == Background) BackgroundDrawObjects.push_back(r);
 
 	return r;
 }
 
-Snake* GameDirector::CreateSnake(sf::RenderWindow *renderWindow, float x, float y)
+Snake* GameDirector::CreateSnake(sf::RenderWindow *renderWindow, float x, float y, DrawLevel drawLevel)
 {
 	Snake *s = new Snake(renderWindow, x, y);
-	currentGameObjects.push_back(s);
-	currentDrawObjects.push_back(s);
+	CurrentGameObjects.push_back(s);
+	
+	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(s);
+	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(s);
+	if (drawLevel == Background) BackgroundDrawObjects.push_back(s);
 
 	return s;
 }
 
-Wall* GameDirector::CreateWall(sf::RenderWindow* renderWindow, Rectangle rect)
+Wall* GameDirector::CreateWall(sf::RenderWindow* renderWindow, Rectangle rect, DrawLevel drawLevel)
 {
 	Wall *w = new Wall(renderWindow, rect);
-	currentEnvironmentObjects.push_back(w);
-	currentDrawObjects.push_back(w);
+	CurrentEnvironmentObjects.push_back(w);
+	
+	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(w);
+	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(w);
+	if (drawLevel == Background) BackgroundDrawObjects.push_back(w);
 
 	return w;
+}
+
+GhostRectangle* GameDirector::CreateGhostRectangle(sf::RenderWindow* renderWindow, Rectangle rect, sf::Texture* texture, DrawLevel drawLevel, std::string name)
+{
+	GhostRectangle *g = (texture == NULL) ? new GhostRectangle(renderWindow, rect) : new GhostRectangle(renderWindow, rect, texture, name);
+	
+	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(g);
+	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(g);
+	if (drawLevel == Background) BackgroundDrawObjects.push_back(g);
+
+	return g;
 }
 
 
 void GameDirector::Remove(IObject *object)
 {
-	if (IGameObject *obj = dynamic_cast<IGameObject*>(object)) currentGameObjects.remove(obj);
-	if (IDrawable *obj = dynamic_cast<IDrawable*>(object)) currentDrawObjects.remove(obj);
+	if (IGameObject *obj = dynamic_cast<IGameObject*>(object)) CurrentGameObjects.remove(obj);
+	if (IDrawable *obj = dynamic_cast<IDrawable*>(object)) MiddlegroundDrawObjects.remove(obj);
 
 	delete object;
 	object = NULL;
@@ -102,22 +146,22 @@ void GameDirector::Remove(IObject *object)
 
 void GameDirector::RemoveGameObject(IGameObject *object)
 {
-	currentGameObjects.remove(object);
+	CurrentGameObjects.remove(object);
 }
 
 void GameDirector::RemoveDrawObject(IDrawable *object)
 {
-	currentDrawObjects.remove(object);
+	MiddlegroundDrawObjects.remove(object);
 }
 
 void GameDirector::Reset()
 {
-	for (IGameObject *object : currentGameObjects)
+	for (IGameObject *object : CurrentGameObjects)
 	{
 		object->Dispose();
 	}
-	currentGameObjects.clear();
-	currentDrawObjects.clear();
+	CurrentGameObjects.clear();
+	MiddlegroundDrawObjects.clear();
 }
 
 

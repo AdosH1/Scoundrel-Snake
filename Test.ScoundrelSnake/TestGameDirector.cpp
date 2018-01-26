@@ -21,7 +21,7 @@ namespace TestScoundrelSnake
 			//Game->AddGameObject(obj);
 
 			///* Assert results */
-			//auto size = (int)Game->currentGameObjects.size();
+			//auto size = (int)Game->CurrentGameObjects.size();
 			//Assert::AreEqual(1, size);
 			//Assert::AreEqual(1, 1);
 		}

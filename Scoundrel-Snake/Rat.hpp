@@ -18,7 +18,10 @@ class Rat : public IGameObject, public IDrawable
 
 		sf::RenderWindow *Window;
         Point Pos;
+		Point LastPos;
+
 		sf::CircleShape Head;
+		const double HeadRadius = 8;
 		float Speed;
 		
 		void Draw() override;
@@ -32,7 +35,6 @@ class Rat : public IGameObject, public IDrawable
         int count1;
 
     private:
-        const float HeadRadius = 8;
         double step; // take x steps? will probably need this variable
         int dir;
 

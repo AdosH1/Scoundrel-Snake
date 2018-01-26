@@ -3,6 +3,7 @@
 
 /* Declarations - these must be included for static references*/
 sf::Texture *GraphicsFactory::pBorderTexture;
+sf::Texture *GraphicsFactory::pFloorTexture;
 
 sf::Texture *GraphicsFactory::pSnakeHeadN;
 sf::Texture *GraphicsFactory::pSnakeHeadE;
@@ -59,27 +60,8 @@ void GraphicsFactory::LoadBoard()
         std::cout << "Error loading border texture." << std::endl;
 
     pBorderTexture = &BorderTexture;
-    FloorSprite.setTexture(FloorTexture);
-
-    //Please note:
-    //The border texture is simply rotated to fit the screen size
-
-    /*BorderTop.setSize(BorderSize);
-    BorderTop.setTexture(pBorderTexture);
-
-    BorderLeft.setSize(BorderSize);
-    BorderLeft.setTexture(pBorderTexture);
-    BorderLeft.setPosition((float)WindowSize.x,0);
-    BorderLeft.rotate(90);
-
-    BorderBottom.setSize(BorderSize);
-    BorderBottom.setTexture(pBorderTexture);
-    BorderBottom.setPosition(0, (float)WindowSize.y - BorderSize.y);
-
-    BorderRight.setSize(BorderSize);
-    BorderRight.setTexture(pBorderTexture);
-    BorderRight.setPosition((float)WindowSize.x,0);
-    BorderRight.rotate(90);*/
+	pFloorTexture = &FloorTexture;
+    //FloorSprite.setTexture(FloorTexture);
 }
 
 void GraphicsFactory::LoadSnake()
