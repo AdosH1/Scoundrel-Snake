@@ -12,6 +12,48 @@ namespace TestUtility
 	TEST_CLASS(TestGeometry)
 	{
 	public:
+		#pragma region TestContactCircleAndCircle
+		TEST_METHOD(TestContactCircleAndCircleNoContact)
+		{
+			Circle c1 = Circle(Point(1, 1), 1);
+			Circle c2 = Circle(Point(3, 3), 1);
+
+			bool contact = Geometry::ContactCircleAndCircle(c1, c2);
+
+			Assert::IsFalse(contact);
+		}
+
+		TEST_METHOD(TestContactCircleAndCircleCrossOver)
+		{
+			Circle c1 = Circle(Point(1, 1), 1);
+			Circle c2 = Circle(Point(2, 2), 2);
+
+			bool contact = Geometry::ContactCircleAndCircle(c1, c2);
+
+			Assert::IsTrue(contact);
+		}
+
+		TEST_METHOD(TestContactCircleAndCircleEngulfed)
+		{
+			Circle c1 = Circle(Point(3, 3), 1);
+			Circle c2 = Circle(Point(3, 3), 2);
+
+			bool contact = Geometry::ContactCircleAndCircle(c1, c2);
+
+			Assert::IsTrue(contact);
+		}
+
+		TEST_METHOD(TestContactCircleAndCircleInRectNotCircle)
+		{
+			Circle c1 = Circle(Point(1, 1), 1);
+			Circle c2 = Circle(Point(3, 3), 0.99);
+
+			bool contact = Geometry::ContactCircleAndCircle(c1, c2);
+
+			Assert::IsFalse(contact);
+		}
+		#pragma endregion
+		
 		#pragma region TestContactCircleAndRectangle
 		TEST_METHOD(TestContactCircleAndRectangleNoContact)
 		{

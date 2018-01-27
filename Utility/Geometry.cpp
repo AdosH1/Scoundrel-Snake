@@ -18,6 +18,24 @@ Point Geometry::PointDifference(Point p1, Point p2)
 	return p3;
 }
 
+#pragma region Circle And Circle
+bool Geometry::ContactCircleAndCircle(Point c1, double r1, Point c2, double r2)
+{
+	if (ContactRectangleAndRectangle(Point(c1.X - r1, c1.Y - r1), Point(c1.X + r1, c1.Y + r1), Point(c2.X - r2, c2.Y - r2), Point(c2.X + r2, c2.Y + r2)))
+		return true;
+	else
+		return (DistanceBetweenTwoPoints(c1, c2) < r1 + r2);
+}
+
+bool Geometry::ContactCircleAndCircle(Circle c1, Circle c2)
+{
+	if (ContactRectangleAndRectangle(Rectangle(Point(c1.Center.X - c1.Radius, c1.Center.Y - c1.Radius), Point(c1.Center.X + c1.Radius, c1.Center.Y + c1.Radius)), Rectangle(Point(c2.Center.X - c2.Radius, c2.Center.Y - c2.Radius), Point(c2.Center.X + c2.Radius, c2.Center.Y + c2.Radius))))
+		return true;
+	else
+		return (DistanceBetweenTwoPoints(c1.Center, c2.Center) < c1.Radius + c2.Radius);
+}
+#pragma endregion
+
 #pragma region Circle And Rectangle
 bool Geometry::ContactCircleAndRectangle(Point circleCenter, double radius, Point minRect, Point maxRect)
 {

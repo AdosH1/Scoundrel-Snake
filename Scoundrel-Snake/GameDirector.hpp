@@ -11,7 +11,7 @@
 class GameDirector
 {
 public:
-	static enum DrawLevel { Background = 0, Middleground = 1, Foreground = 2 };
+	enum DrawLevel { Background = 0, Middleground = 1, Foreground = 2 };
 
 	std::list<IGameObject*> CurrentGameObjects;
 	std::list<IEnvironmentObject*> CurrentEnvironmentObjects;

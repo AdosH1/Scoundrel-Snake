@@ -9,10 +9,7 @@ GameDirector::GameDirector()
 	CurrentDrawObjects.push_back(&ForegroundDrawObjects);
 }
 
-GameDirector::~GameDirector()
-{
-
-}
+GameDirector::~GameDirector() = default;
 
 void GameDirector::AddDrawObject(IDrawable *object)
 {
@@ -43,6 +40,7 @@ void GameDirector::DrawGameObjects()
 
 void GameDirector::Referee()
 {
+	// Loop through all game objects
 	for (IGameObject *object : CurrentGameObjects)
 	{
 		#pragma region Snake
@@ -56,6 +54,17 @@ void GameDirector::Referee()
 						snake->Pos = snake->LastPos;
 				}
 			}
+			for (IGameObject *object : CurrentGameObjects)
+			{
+				if (Rat *rat = dynamic_cast<Rat*>(object))
+				{
+					if(Geometry::ContactCircleAndCircle(snake->Pos, snake->HeadRadius, rat->Pos, rat->HeadRadius))
+					{
+						Remove(rat);
+					}
+				}
+			}
+			continue; //if cast, it won't be anything else
 		}
 		#pragma endregion 
 
@@ -70,6 +79,7 @@ void GameDirector::Referee()
 						rat->Pos = rat->LastPos;
 				}
 			}
+			continue;
 		}
 		#pragma endregion 
 

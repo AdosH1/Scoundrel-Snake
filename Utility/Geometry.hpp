@@ -12,6 +12,9 @@ public:
 	// Returns a point that is the difference between the two provided (p1 - p2) - always positive
 	static Point PointDifference(Point p1, Point p2);
 
+	static bool ContactCircleAndCircle(Point c1, double r1, Point c2, double r2);
+	static bool ContactCircleAndCircle(Circle c1, Circle c2);
+
 	static bool ContactCircleAndRectangle(Point circleCenter, double radius, Point minRect, Point maxRect);
 	static bool ContactCircleAndRectangle(Point circleCenter, double radius, Rectangle rect);
 	static bool ContactCircleAndRectangle(Circle circle, Point minRect, Point maxRect);
