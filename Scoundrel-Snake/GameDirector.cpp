@@ -79,6 +79,19 @@ void GameDirector::Referee()
 						rat->Pos = rat->LastPos;
 				}
 			}
+			for (IGameObject *object : CurrentGameObjects)
+			{
+				if (Snake *snake = dynamic_cast<Snake*>(object))
+				{
+					for (int i = 0; i < snake->TailPos.size(); i++)
+					{
+						if (Geometry::ContactCircleAndCircle(rat->Pos, rat->HeadRadius, snake->TailPos.at(i), snake->TailRadius))
+						{
+							Remove(snake);
+						}
+					}
+				}
+			}
 			continue;
 		}
 		#pragma endregion 
@@ -148,7 +161,12 @@ GhostRectangle* GameDirector::CreateGhostRectangle(sf::RenderWindow* renderWindo
 void GameDirector::Remove(IObject *object)
 {
 	if (IGameObject *obj = dynamic_cast<IGameObject*>(object)) CurrentGameObjects.remove(obj);
-	if (IDrawable *obj = dynamic_cast<IDrawable*>(object)) MiddlegroundDrawObjects.remove(obj);
+	if (IDrawable *obj = dynamic_cast<IDrawable*>(object))
+	{
+		ForegroundDrawObjects.remove(obj);
+		MiddlegroundDrawObjects.remove(obj);
+		BackgroundDrawObjects.remove(obj);
+	}
 
 	delete object;
 	object = NULL;

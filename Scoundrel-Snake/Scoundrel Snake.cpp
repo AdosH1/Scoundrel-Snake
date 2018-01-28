@@ -25,6 +25,17 @@ void LoadDojo(sf::RenderWindow *Window, GameDirector *Game)
 	Game->CreateWall(Window, Rectangle(Point(15, 585), Point(585, 600)), GameDirector::Middleground);
 
 	Game->CreateGhostRectangle(Window, Rectangle(Point(0, 0), Point(600, 600)), GraphicsFactory::pFloorTexture, GameDirector::Background, "Wooden Floor");
+
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
 }
 
 int main() 
@@ -46,17 +57,6 @@ int main()
 	Graphics->Initialise();
 
 	Snake *s = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(&Window, 300, 300, GameDirector::Middleground);
-
 	LoadDojo(&Window, Game);
 
 	while (Window.isOpen())
