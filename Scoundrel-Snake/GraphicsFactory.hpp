@@ -14,13 +14,17 @@ class GraphicsFactory
 
     // Menu Screen
     sf::Sprite MenuSprite;
-    sf::Texture MenuTexture;
+    sf::Texture MenuScreenTexture;
+	static sf::Texture *pMenuScreenTexture;
     sf::Sprite PlaySprite;
-    sf::Texture PlayTexture;
+    sf::Texture PlayButtonTexture;
+	static sf::Texture *pPlayButtonTexture;
     sf::Sprite ExitSprite;
-    sf::Texture ExitTexture;
+    sf::Texture ExitButtonTexture;
+	static sf::Texture *pExitButtonTexture;
     sf::Sprite SelectorSprite;
     sf::Texture SelectorTexture;
+	static sf::Texture *pSelectorTexture;
 
     // Board
     sf::Texture BorderTexture;

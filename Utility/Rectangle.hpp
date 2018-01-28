@@ -18,4 +18,6 @@ public:
 	double Width;
 	double Height;
 
+	void MoveTopLeftTo(Point p);
+	void MoveCenterTo(Point p);
 };

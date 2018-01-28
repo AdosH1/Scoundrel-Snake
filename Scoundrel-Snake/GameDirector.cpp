@@ -1,9 +1,11 @@
 ﻿#pragma once
 #include "GameDirector.hpp"
 #include "../Utility/Geometry.hpp"
+#include "GraphicsFactory.hpp"
 
 GameDirector::GameDirector()
 {
+	GameOver = true;
 	CurrentDrawObjects.push_back(&BackgroundDrawObjects);
 	CurrentDrawObjects.push_back(&MiddlegroundDrawObjects);
 	CurrentDrawObjects.push_back(&ForegroundDrawObjects);
@@ -48,6 +50,7 @@ void GameDirector::Referee()
 		{
 			for (IEnvironmentObject *env : CurrentEnvironmentObjects)
 			{
+				// If Snake hits wall
 				if (Wall *wall = dynamic_cast<Wall*>(env))
 				{
 					if (Geometry::ContactCircleAndRectangle(snake->Pos, snake->HeadRadius, wall->Geo))
@@ -56,6 +59,7 @@ void GameDirector::Referee()
 			}
 			for (IGameObject *object : CurrentGameObjects)
 			{
+				// If Snake head hits Rat
 				if (Rat *rat = dynamic_cast<Rat*>(object))
 				{
 					if(Geometry::ContactCircleAndCircle(snake->Pos, snake->HeadRadius, rat->Pos, rat->HeadRadius))
@@ -73,6 +77,7 @@ void GameDirector::Referee()
 		{
 			for (IEnvironmentObject *env : CurrentEnvironmentObjects)
 			{
+				// If Rat hits Wall
 				if (Wall *wall = dynamic_cast<Wall*>(env))
 				{
 					if (Geometry::ContactCircleAndRectangle(rat->Pos, rat->HeadRadius, wall->Geo))
@@ -81,6 +86,7 @@ void GameDirector::Referee()
 			}
 			for (IGameObject *object : CurrentGameObjects)
 			{
+				// If Rat hits Snake tail
 				if (Snake *snake = dynamic_cast<Snake*>(object))
 				{
 					for (int i = 0; i < snake->TailPos.size(); i++)
@@ -157,6 +163,24 @@ GhostRectangle* GameDirector::CreateGhostRectangle(sf::RenderWindow* renderWindo
 	return g;
 }
 
+void GameDirector::LoadMenu(sf::RenderWindow *renderWindow)
+{
+	Rectangle rMenu = Rectangle(0, 0, 600, 600);
+	CreateGhostRectangle(renderWindow, rMenu, GraphicsFactory::pMenuScreenTexture, Background, "MenuScreen");
+
+	Rectangle rPlayButton = Rectangle(0, 0, 100, 60);
+	GhostRectangle* play = CreateGhostRectangle(renderWindow, rPlayButton, GraphicsFactory::pPlayButtonTexture, Foreground, "PlayButton");
+	play->Geo.MoveTopLeftTo(Point(100, 400));
+
+	Rectangle rExitButton = Rectangle(0, 0, 100, 60);
+	GhostRectangle* exit = CreateGhostRectangle(renderWindow, rExitButton, GraphicsFactory::pExitButtonTexture, Foreground, "ExitButton");
+	exit->Geo.MoveTopLeftTo(Point(100, 480));
+
+	Rectangle rSelector = Rectangle(0, 0, 25, 25);
+	GhostRectangle* selector = CreateGhostRectangle(renderWindow, rSelector, GraphicsFactory::pSelectorTexture, Foreground, "Selector");
+	selector->Geo.MoveCenterTo(Point(80, 370));
+
+}
 
 void GameDirector::Remove(IObject *object)
 {
@@ -184,12 +208,18 @@ void GameDirector::RemoveDrawObject(IDrawable *object)
 
 void GameDirector::Reset()
 {
-	for (IGameObject *object : CurrentGameObjects)
+	/*for (IGameObject *object : CurrentGameObjects)
 	{
 		object->Dispose();
-	}
-	CurrentGameObjects.clear();
+	}*/
+	GameOver = true;
+
+	ForegroundDrawObjects.clear();
 	MiddlegroundDrawObjects.clear();
+	BackgroundDrawObjects.clear();
+
+	CurrentEnvironmentObjects.clear();
+	CurrentGameObjects.clear();
 }
 
 

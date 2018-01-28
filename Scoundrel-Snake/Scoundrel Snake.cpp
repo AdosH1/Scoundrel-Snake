@@ -17,6 +17,17 @@
 #include "SFML/Audio.hpp"
 #include "PlayerControl.hpp"
 
+void Menu(sf::RenderWindow *Window, GameDirector *Game)
+{
+	Game->Reset();
+	Game->LoadMenu(Window);
+
+	/*while (Game->GameOver)
+	{
+		
+	}*/
+}
+
 void LoadDojo(sf::RenderWindow *Window, GameDirector *Game)
 {
 	Game->CreateWall(Window, Rectangle(Point(0, 0), Point(15, 600)), GameDirector::Middleground);
@@ -57,7 +68,8 @@ int main()
 	Graphics->Initialise();
 
 	Snake *s = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
-	LoadDojo(&Window, Game);
+	//LoadDojo(&Window, Game);
+	Menu(&Window, Game);
 
 	while (Window.isOpen())
 	{

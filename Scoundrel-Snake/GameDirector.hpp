@@ -11,6 +11,7 @@
 class GameDirector
 {
 public:
+	bool GameOver;
 	enum DrawLevel { Background = 0, Middleground = 1, Foreground = 2 };
 
 	std::list<IGameObject*> CurrentGameObjects;
@@ -36,6 +37,8 @@ public:
 
 	void GameTurn();
 	void Referee();
+
+	void LoadMenu(sf::RenderWindow *renderWindow);
 
 	void Reset();
 	void Remove(IObject *object);

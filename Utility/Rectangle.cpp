@@ -60,3 +60,24 @@ Rectangle::Rectangle(Point p1, Point p2)
 }
 
 Rectangle::~Rectangle() = default;
+
+void Rectangle::MoveTopLeftTo(Point p)
+{
+	Min.X = p.X;
+	Max.Y = p.Y;
+	Min.Y = p.Y - Height;
+	Max.X = p.X + Width;
+	// Recalculate center
+	Center = Point((Max.X + Min.X) / 2, (Max.Y + Min.Y) / 2);
+}
+
+void Rectangle::MoveCenterTo(Point p)
+{
+	Center = p;
+
+	Min.X = p.X - (Width / 2);
+	Min.Y = p.Y - (Height / 2);
+	Max.X = p.X + (Width / 2);
+	Max.Y = p.Y + (Height / 2);
+}
+

@@ -2,6 +2,11 @@
 #include <iostream>
 
 /* Declarations - these must be included for static references*/
+sf::Texture *GraphicsFactory::pMenuScreenTexture;
+sf::Texture *GraphicsFactory::pPlayButtonTexture;
+sf::Texture *GraphicsFactory::pExitButtonTexture;
+sf::Texture *GraphicsFactory::pSelectorTexture;
+
 sf::Texture *GraphicsFactory::pBorderTexture;
 sf::Texture *GraphicsFactory::pFloorTexture;
 
@@ -30,24 +35,28 @@ GraphicsFactory::GraphicsFactory(int WindowX, int WindowY, int borderWidth = 12)
 
 void GraphicsFactory::LoadMenu() 
 {
-        if (!MenuTexture.loadFromFile("Resources/Graphics/Scoundrel_menu.png"))
-            std::cout << "Error loading menu texture." << std::endl;
-        MenuSprite.setTexture(MenuTexture);
+    if (!MenuScreenTexture.loadFromFile("Resources/Graphics/Scoundrel_menu.png"))
+        std::cout << "Error loading menu texture." << std::endl;
+	pMenuScreenTexture = &MenuScreenTexture;
+    //MenuSprite.setTexture(MenuScreenTexture);
 
-        if (!PlayTexture.loadFromFile("Resources/Graphics/Play.png"))
-            std::cout << "Error loading play button texture." << std::endl;
-        PlaySprite.setTexture(PlayTexture);
-        PlaySprite.setPosition(80,320);
+    if (!PlayButtonTexture.loadFromFile("Resources/Graphics/Play.png"))
+        std::cout << "Error loading play button texture." << std::endl;
+	pPlayButtonTexture = &PlayButtonTexture;
+    //PlaySprite.setTexture(PlayButtonTexture);
+    //PlaySprite.setPosition(80,320);
 
-        if (!ExitTexture.loadFromFile("Resources/Graphics/Exit.png"))
-            std::cout << "Error loading exit button texture." << std::endl;
-        ExitSprite.setTexture(ExitTexture);
-        ExitSprite.setPosition(80,400);
+    if (!ExitButtonTexture.loadFromFile("Resources/Graphics/Exit.png"))
+        std::cout << "Error loading exit button texture." << std::endl;
+	pExitButtonTexture = &ExitButtonTexture;
+    //ExitSprite.setTexture(ExitButtonTexture);
+    //ExitSprite.setPosition(80,400);
 
-        if (!SelectorTexture.loadFromFile("Resources/Graphics/Selector.png"))
-            std::cout << "Error loading selector texture." << std::endl;
-        SelectorSprite.setTexture(SelectorTexture);
-        SelectorSprite.setPosition(60,332);
+    if (!SelectorTexture.loadFromFile("Resources/Graphics/Selector.png"))
+        std::cout << "Error loading selector texture." << std::endl;
+	pSelectorTexture = &SelectorTexture;
+    //SelectorSprite.setTexture(SelectorTexture);
+    //SelectorSprite.setPosition(60,332);
 }
 
 void GraphicsFactory::LoadBoard()
