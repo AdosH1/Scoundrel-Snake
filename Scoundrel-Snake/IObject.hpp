@@ -6,4 +6,6 @@ class IObject
 public:
 	IObject() {};
 	virtual ~IObject() {};
+
+	bool Dispose = false;
 };

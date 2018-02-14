@@ -68,8 +68,8 @@ int main()
 	Graphics->Initialise();
 
 	Snake *s = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
-	//LoadDojo(&Window, Game);
-	Menu(&Window, Game);
+	LoadDojo(&Window, Game);
+	//Menu(&Window, Game);
 
 	while (Window.isOpen())
 	{

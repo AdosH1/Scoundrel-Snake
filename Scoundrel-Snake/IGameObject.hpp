@@ -18,7 +18,6 @@ public:
 		}
 		return true;
 	}
-	virtual void Dispose() { throw new std::string("Virtual method 'Dispose()' not overridden."); };
 
 	IGameObject() {};
 	virtual ~IGameObject() {};

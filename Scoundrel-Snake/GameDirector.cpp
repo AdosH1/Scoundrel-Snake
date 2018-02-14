@@ -64,7 +64,9 @@ void GameDirector::Referee()
 				{
 					if(Geometry::ContactCircleAndCircle(snake->Pos, snake->HeadRadius, rat->Pos, rat->HeadRadius))
 					{
-						Remove(rat);
+						//Remove(rat);
+						rat->Dispose = true;
+						snake->Lengthen(15);
 					}
 				}
 			}
@@ -75,8 +77,9 @@ void GameDirector::Referee()
 		#pragma region Rat
 		if (Rat *rat = dynamic_cast<Rat*>(object))
 		{
-			for (IEnvironmentObject *env : CurrentEnvironmentObjects)
+			for (int i = 0; i < CurrentEnvironmentObjects.size(); i++)
 			{
+				IEnvironmentObject* env = CurrentEnvironmentObjects.at(i);
 				// If Rat hits Wall
 				if (Wall *wall = dynamic_cast<Wall*>(env))
 				{
@@ -84,8 +87,9 @@ void GameDirector::Referee()
 						rat->Pos = rat->LastPos;
 				}
 			}
-			for (IGameObject *object : CurrentGameObjects)
+			for (int i = 0; i < CurrentGameObjects.size(); i++)
 			{
+				IGameObject* object = CurrentGameObjects.at(i);
 				// If Rat hits Snake tail
 				if (Snake *snake = dynamic_cast<Snake*>(object))
 				{
@@ -93,7 +97,8 @@ void GameDirector::Referee()
 					{
 						if (Geometry::ContactCircleAndCircle(rat->Pos, rat->HeadRadius, snake->TailPos.at(i), snake->TailRadius))
 						{
-							Remove(snake);
+							//Remove(snake);
+							snake->Dispose = true;
 						}
 					}
 				}
@@ -112,8 +117,26 @@ void GameDirector::GameTurn()
 	{
 		if (Rat *rat = dynamic_cast<Rat*>(object)) rat->PlayTurn();
 	}
-	
 	Referee();
+	Cleanup();
+}
+
+void GameDirector::Cleanup()
+{
+	for (std::vector<IGameObject*>::iterator it = CurrentGameObjects.begin(); it < CurrentGameObjects.end(); ++it)
+	{
+		auto object = *it;
+		if (object->Dispose)
+		{
+			if (IDrawable *obj = dynamic_cast<IDrawable*>(object))
+			{
+				ForegroundDrawObjects.remove(obj);
+				MiddlegroundDrawObjects.remove(obj);
+				BackgroundDrawObjects.remove(obj);
+			}
+			CurrentGameObjects.erase(std::remove(CurrentGameObjects.begin(), CurrentGameObjects.end(), object), CurrentGameObjects.end());
+		}
+	}
 }
 
 Rat* GameDirector::CreateRat(sf::RenderWindow *renderWindow, float x, float y, DrawLevel drawLevel)
@@ -184,7 +207,8 @@ void GameDirector::LoadMenu(sf::RenderWindow *renderWindow)
 
 void GameDirector::Remove(IObject *object)
 {
-	if (IGameObject *obj = dynamic_cast<IGameObject*>(object)) CurrentGameObjects.remove(obj);
+	//if (IGameObject *obj = dynamic_cast<IGameObject*>(object)) CurrentGameObjects.remove(obj);
+	if (IGameObject *obj = dynamic_cast<IGameObject*>(object)) std::remove(CurrentGameObjects.begin(), CurrentGameObjects.end(), obj);
 	if (IDrawable *obj = dynamic_cast<IDrawable*>(object))
 	{
 		ForegroundDrawObjects.remove(obj);
@@ -193,12 +217,13 @@ void GameDirector::Remove(IObject *object)
 	}
 
 	delete object;
-	object = NULL;
+	//object = NULL;
 }
 
 void GameDirector::RemoveGameObject(IGameObject *object)
 {
-	CurrentGameObjects.remove(object);
+	//CurrentGameObjects.remove(object);
+	//CurrentGameObjects.erase(CurrentGameObjects.begin());
 }
 
 void GameDirector::RemoveDrawObject(IDrawable *object)
@@ -208,10 +233,6 @@ void GameDirector::RemoveDrawObject(IDrawable *object)
 
 void GameDirector::Reset()
 {
-	/*for (IGameObject *object : CurrentGameObjects)
-	{
-		object->Dispose();
-	}*/
 	GameOver = true;
 
 	ForegroundDrawObjects.clear();
