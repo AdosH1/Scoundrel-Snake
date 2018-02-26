@@ -1,4 +1,4 @@
-////Scoundrel Snake, a reimagining of the classic game snake
+////InGame Snake, a reimagining of the classic game snake
 //// By Aden Huen
 //
 //
@@ -16,37 +16,26 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include "PlayerControl.hpp"
+#include "Dojo.hpp"
 
 void Menu(sf::RenderWindow *Window, GameDirector *Game)
 {
 	Game->Reset();
 	Game->LoadMenu(Window);
 
-	/*while (Game->GameOver)
-	{
-		
-	}*/
 }
 
-void LoadDojo(sf::RenderWindow *Window, GameDirector *Game)
+void PlayerTurn(sf::RenderWindow *Window, GameDirector *Game, Snake *s)
 {
-	Game->CreateWall(Window, Rectangle(Point(0, 0), Point(15, 600)), GameDirector::Middleground);
-	Game->CreateWall(Window, Rectangle(Point(15, 0), Point(600, 15)), GameDirector::Middleground);
-	Game->CreateWall(Window, Rectangle(Point(585, 15), Point(600, 600)), GameDirector::Middleground);
-	Game->CreateWall(Window, Rectangle(Point(15, 585), Point(585, 600)), GameDirector::Middleground);
+	PlayerControl::PlayerAction(s);
 
-	Game->CreateGhostRectangle(Window, Rectangle(Point(0, 0), Point(600, 600)), GraphicsFactory::pFloorTexture, GameDirector::Background, "Wooden Floor");
-
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	if (PlayerControl::prevInput == PlayerControl::Respawn)
+	{
+		if (s == NULL)
+		{
+			Game->CreateSnake(Window, 10, 10);
+		}
+	}
 }
 
 int main() 
@@ -66,15 +55,17 @@ int main()
 	GameDirector *Game = new GameDirector();
 	GraphicsFactory *Graphics = new GraphicsFactory(windowSize.x, windowSize.y, border_width);
 	Graphics->Initialise();
+	IMap* CurrentMap = new Dojo(&Window, Game);
+	CurrentMap->Load();
 
 	Snake *s = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
-	LoadDojo(&Window, Game);
-	//Menu(&Window, Game);
+	PlayerControl::GameMode = PlayerControl::InGame;
 
 	while (Window.isOpen())
 	{
-		if (s != NULL) PlayerControl::PlayerAction(s);
+		PlayerTurn(&Window, Game, s);
 		Game->GameTurn();
+		CurrentMap->Upkeep();
 
 		//Draw game objects
 		Window.clear();

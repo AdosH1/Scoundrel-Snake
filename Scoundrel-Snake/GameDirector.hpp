@@ -13,12 +13,10 @@ class GameDirector
 public:
 	bool GameOver;
 	enum DrawLevel { Background = 0, Middleground = 1, Foreground = 2 };
+	std::map<std::string, int> EnemyCount;
 
-	//std::list<IGameObject*> CurrentGameObjects;
 	std::vector<IGameObject*> CurrentGameObjects;
-	//std::list<IEnvironmentObject*> CurrentEnvironmentObjects;
 	std::vector<IEnvironmentObject*> CurrentEnvironmentObjects;
-	//std::list<std::list<IDrawable*>*> CurrentDrawObjects;
 	std::vector<std::list<IDrawable*>*> CurrentDrawObjects;
 
 	std::list<IDrawable*> ForegroundDrawObjects;
@@ -41,6 +39,7 @@ public:
 	void GameTurn();
 	void Referee();
 	void Cleanup();
+	void PostTurn();
 
 	void LoadMenu(sf::RenderWindow *renderWindow);
 

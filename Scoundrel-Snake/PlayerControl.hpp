@@ -8,19 +8,27 @@ class PlayerControl
 		enum Input
 		{
 			noAction,
-			moveN,
-			moveE,
-			moveS,
-			moveW,
-			moveNE,
-			moveSE,
-			moveSW,
-			moveNW,
-			Exit
+			Up,
+			Right,
+			Down,
+			Left,
+			UpRight,
+			DownRight,
+			DownLeft,
+			UpLeft,
+			Exit,
+			Respawn
+		};
+
+		enum Mode
+		{
+			Menu,
+			InGame
 		};
 
 		static Input currInput;
 		static Input prevInput;
+		static Mode GameMode;
 
 		PlayerControl();
 		

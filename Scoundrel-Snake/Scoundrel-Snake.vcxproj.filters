@@ -34,6 +34,12 @@
     <Filter Include="Source Files\Drawables">
       <UniqueIdentifier>{46b90e6e-a725-4322-9b1a-56c6692e631f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Maps">
+      <UniqueIdentifier>{bf7955dc-144c-43a2-b311-0a7f35858a20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Maps">
+      <UniqueIdentifier>{40af4a35-923c-404e-afad-a0d5bb5dd82d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsFactory.cpp">
@@ -60,11 +66,11 @@
     <ClCompile Include="GhostRectangle.cpp">
       <Filter>Source Files\Drawables</Filter>
     </ClCompile>
+    <ClCompile Include="Dojo.cpp">
+      <Filter>Source Files\Maps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsFactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -97,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="Wall.hpp">
       <Filter>Header Files\EnvironmentObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="IMap.hpp">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Dojo.hpp">
+      <Filter>Header Files\Maps</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

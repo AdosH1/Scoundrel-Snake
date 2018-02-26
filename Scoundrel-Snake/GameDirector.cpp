@@ -9,6 +9,8 @@ GameDirector::GameDirector()
 	CurrentDrawObjects.push_back(&BackgroundDrawObjects);
 	CurrentDrawObjects.push_back(&MiddlegroundDrawObjects);
 	CurrentDrawObjects.push_back(&ForegroundDrawObjects);
+
+	EnemyCount["Rat"] = 0;
 }
 
 GameDirector::~GameDirector() = default;
@@ -64,8 +66,8 @@ void GameDirector::Referee()
 				{
 					if(Geometry::ContactCircleAndCircle(snake->Pos, snake->HeadRadius, rat->Pos, rat->HeadRadius))
 					{
-						//Remove(rat);
 						rat->Dispose = true;
+						EnemyCount["Rat"] -= 1;
 						snake->Lengthen(15);
 					}
 				}
@@ -97,7 +99,6 @@ void GameDirector::Referee()
 					{
 						if (Geometry::ContactCircleAndCircle(rat->Pos, rat->HeadRadius, snake->TailPos.at(i), snake->TailRadius))
 						{
-							//Remove(snake);
 							snake->Dispose = true;
 						}
 					}
@@ -115,6 +116,7 @@ void GameDirector::GameTurn()
 {
 	for (IGameObject *object : CurrentGameObjects)
 	{
+		// Add other game objects here
 		if (Rat *rat = dynamic_cast<Rat*>(object)) rat->PlayTurn();
 	}
 	Referee();
@@ -135,6 +137,7 @@ void GameDirector::Cleanup()
 				BackgroundDrawObjects.remove(obj);
 			}
 			CurrentGameObjects.erase(std::remove(CurrentGameObjects.begin(), CurrentGameObjects.end(), object), CurrentGameObjects.end());
+			object = NULL;
 		}
 	}
 }
@@ -143,6 +146,7 @@ Rat* GameDirector::CreateRat(sf::RenderWindow *renderWindow, float x, float y, D
 {
 	Rat *r = new Rat(renderWindow, x, y);
 	CurrentGameObjects.push_back(r);
+	EnemyCount["Rat"] += 1;
 	
 	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(r);
 	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(r);
