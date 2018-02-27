@@ -9,6 +9,10 @@ class Geometry
 public:
 	static double DistanceBetweenTwoPoints(Point p1, Point p2);
 
+	static Point RandomPointWithinRectangle(Rectangle rect);
+	static Point RandomPointWithinRectangle(Point min, Point max);
+	static Point RandomPointWithinRectangleAwayFromPoint(Rectangle rect, Point awayFrom, double distanceXY);
+
 	// Returns a point that is the difference between the two provided (p1 - p2) - always positive
 	static Point PointDifference(Point p1, Point p2);
 

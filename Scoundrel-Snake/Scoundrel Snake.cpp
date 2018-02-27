@@ -55,10 +55,11 @@ int main()
 	GameDirector *Game = new GameDirector();
 	GraphicsFactory *Graphics = new GraphicsFactory(windowSize.x, windowSize.y, border_width);
 	Graphics->Initialise();
-	IMap* CurrentMap = new Dojo(&Window, Game);
-	CurrentMap->Load();
 
 	Snake *s = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
+
+	IMap* CurrentMap = new Dojo(&Window, Game, s);
+	CurrentMap->Load();
 	PlayerControl::GameMode = PlayerControl::InGame;
 
 	while (Window.isOpen())

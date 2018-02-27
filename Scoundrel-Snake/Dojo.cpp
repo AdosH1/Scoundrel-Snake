@@ -1,10 +1,12 @@
 #pragma once
 #include "Dojo.hpp"
 
-Dojo::Dojo(sf::RenderWindow* window, GameDirector* game)
+Dojo::Dojo(sf::RenderWindow* window, GameDirector* game, IGameObject* player)
 {
 	Window = window;
 	Game = game;
+	MapSize = Rectangle(Point(23, 23), Point(577, 577)); // playable map size
+	Player = player;
 }
 
 Dojo::~Dojo()
@@ -22,13 +24,17 @@ void Dojo::Load()
 	// Background
 	Game->CreateGhostRectangle(Window, Rectangle(Point(0, 0), Point(600, 600)), GraphicsFactory::pFloorTexture, GameDirector::Background, "Wooden Floor");
 	// Creatures
-	Game->CreateRat(Window, 300, 300, GameDirector::Middleground);
+	Game->CreateRat(Window, 350, 350, GameDirector::Middleground);
 	Game->CreateRat(Window, 500, 500, GameDirector::Middleground);
 }
 
 void Dojo::Upkeep()
 {
-	if (Game->EnemyCount["Rat"] < 2) Game->CreateRat(Window, 250, 250);
+	if (Game->EnemyCount["Rat"] < 2)
+	{
+		Point p = Geometry::RandomPointWithinRectangleAwayFromPoint(MapSize, Player->Position(), 100);
+		Game->CreateRat(Window, p.X, p.Y);
+	}
 }
 
 

@@ -13,9 +13,10 @@ class Snake : public IDrawable, public IGameObject
 		sf::RenderWindow *Window;
 
 		/* Current head position */
+		Point Position() override;
         Point Pos;
 		const double HeadRadius = 8;
-		const double TailRadius = 6;
+		const double TailRadius = 5;
 		Point LastPos;
 
 		/* A deque of all tail positions */

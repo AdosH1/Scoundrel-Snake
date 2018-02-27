@@ -63,6 +63,12 @@ Snake::~Snake()
 
 #pragma endregion 
 
+Point Snake::Position()
+{
+	return Pos;
+}
+
+
 void Snake::Draw()
 {
 	/* Draw Tail */

@@ -1,5 +1,6 @@
 #pragma once
 #include "IObject.hpp"
+#include "../Utility/Point.hpp"
 
 class IGameObject : public virtual IObject
 {
@@ -21,4 +22,6 @@ public:
 
 	IGameObject() {};
 	virtual ~IGameObject() {};
+
+	virtual Point Position() { return Point(); };
 };

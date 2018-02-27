@@ -9,6 +9,38 @@ double Geometry::DistanceBetweenTwoPoints(Point p1, Point p2)
 	return sqrt((diffX * diffX) + (diffY * diffY));
 }
 
+Point Geometry::RandomPointWithinRectangle(Rectangle rect)
+{
+	double x = rand() % (int)rect.Max.X + (int)rect.Min.X;
+	double y = rand() % (int)rect.Max.Y + (int)rect.Min.Y;
+	return Point(x, y);
+}
+
+Point Geometry::RandomPointWithinRectangle(Point min, Point max)
+{
+	double x = rand() % (int)max.X + (int)min.X;
+	double y = rand() % (int)max.Y + (int)min.Y;
+	return Point(x, y);
+}
+
+Point Geometry::RandomPointWithinRectangleAwayFromPoint(Rectangle rect, Point awayFrom, double distanceXY)
+{
+	distanceXY = abs(distanceXY);
+	double x;
+	double y;
+	rect.Max.X -= rect.Min.X;
+	rect.Max.Y -= rect.Min.Y;
+	/*if (rect.Min.X < 0) rect.Max.X -= rect.Min.X;
+	if (rect.Min.Y < 0) rect.Max.Y -= rect.Min.Y;*/
+	do
+	{
+		x = rand() % (int)rect.Max.X + (int)rect.Min.X;
+		y = rand() % (int)rect.Max.Y + (int)rect.Min.Y;
+	} while (abs(awayFrom.X - x) < distanceXY || abs(awayFrom.Y - y) < distanceXY);
+	
+	return Point(x, y);
+}
+
 Point Geometry::PointDifference(Point p1, Point p2)
 {
 	Point p3 = p1 - p2;

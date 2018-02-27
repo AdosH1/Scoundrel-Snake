@@ -44,6 +44,7 @@ void GameDirector::DrawGameObjects()
 
 void GameDirector::Referee()
 {
+	bool SnakeAteRat = false;
 	// Loop through all game objects
 	for (IGameObject *object : CurrentGameObjects)
 	{
@@ -68,7 +69,8 @@ void GameDirector::Referee()
 					{
 						rat->Dispose = true;
 						EnemyCount["Rat"] -= 1;
-						snake->Lengthen(15);
+						//snake->Lengthen(15);
+						SnakeAteRat = true;
 					}
 				}
 			}
@@ -95,6 +97,7 @@ void GameDirector::Referee()
 				// If Rat hits Snake tail
 				if (Snake *snake = dynamic_cast<Snake*>(object))
 				{
+					if (SnakeAteRat) continue;
 					for (int i = 0; i < snake->TailPos.size(); i++)
 					{
 						if (Geometry::ContactCircleAndCircle(rat->Pos, rat->HeadRadius, snake->TailPos.at(i), snake->TailRadius))

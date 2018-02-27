@@ -32,6 +32,12 @@ Rat::Rat(sf::RenderWindow *renderWindow, float x, float y, float speed)
 }
 #pragma endregion 
 
+Point Rat::Position()
+{
+	return Pos;
+}
+
+
 void Rat::ChooseDirection() 
 {
     dir = rand() % 5;
