@@ -29,15 +29,16 @@ class PlayerControl
 		static Input currInput;
 		static Input prevInput;
 		static Mode GameMode;
+		static IGameObject* Player;
 
 		PlayerControl();
 		
 		///Gets player input - if none, returns previous input.
 		static Input getPlayerInput(Input &prevInput);
 
-		static void processInput(Input input, Snake *snake);
+		static void processInput(Input input, IGameObject *player);
 
-		static void PlayerAction(Snake *snake);
+		static void PlayerAction();
 
 };
 

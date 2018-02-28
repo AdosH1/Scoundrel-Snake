@@ -16,6 +16,8 @@ Dojo::~Dojo()
 
 void Dojo::Load()
 {
+	//Game->Reset();
+
 	// Border walls
 	Game->CreateWall(Window, Rectangle(Point(0, 0), Point(15, 600)), GameDirector::Middleground);
 	Game->CreateWall(Window, Rectangle(Point(15, 0), Point(600, 15)), GameDirector::Middleground);
@@ -32,7 +34,7 @@ void Dojo::Upkeep()
 {
 	if (Game->EnemyCount["Rat"] < 2)
 	{
-		Point p = Geometry::RandomPointWithinRectangleAwayFromPoint(MapSize, Player->Position(), 100);
+		Point p = Geometry::RandomPointWithinRectangleAwayFromPoint(MapSize, Player->GetPosition(), 100);
 		Game->CreateRat(Window, p.X, p.Y);
 	}
 }

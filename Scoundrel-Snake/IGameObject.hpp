@@ -23,5 +23,13 @@ public:
 	IGameObject() {};
 	virtual ~IGameObject() {};
 
-	virtual Point Position() { return Point(); };
+	virtual Point GetPosition() { throw std::exception("GetPosition method not implemented."); };
+	virtual Point GetLastPosition() { throw std::exception("GetLastPosition method not implemented."); };
+	virtual double GetSpeed() { throw std::exception("GetSpeed method not implemented."); };
+
+	virtual bool SetPosition(Point pos) { throw std::exception("SetPosition method not implemented."); };
+	virtual bool SetLastPosition(Point pos) { throw std::exception("SetLastPosition method not implemented."); };
+	virtual bool SetSpeed(double speed) { throw std::exception("SetSpeed method not implemented."); };
+
+	virtual bool Update(int input = NULL) { throw std::exception("Update method not implemented."); };
 };

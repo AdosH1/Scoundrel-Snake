@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Snake.hpp"
-#include "GraphicsFactory.hpp"
 
 #pragma region Constructors / Destructors
 Snake::Snake(sf::RenderWindow *renderWindow, float x, float y)
@@ -63,18 +62,51 @@ Snake::~Snake()
 
 #pragma endregion 
 
-Point Snake::Position()
+Point Snake::GetPosition()
 {
 	return Pos;
 }
 
+Point Snake::GetLastPosition()
+{
+	return LastPos;
+}
+
+double Snake::GetSpeed()
+{
+	return Speed;
+}
+
+bool Snake::SetPosition(Point pos)
+{
+	Pos = pos;
+	return true;
+}
+
+bool Snake::SetLastPosition(Point pos)
+{
+	LastPos = pos;
+	return true;
+}
+
+bool Snake::SetSpeed(double speed)
+{
+	Speed = speed;
+	return true;
+}
+
+bool Snake::Update(int input = 0)
+{
+	UpdateHeadTexture(input);
+	UpdateTail();
+	return true;
+}
 
 void Snake::Draw()
 {
 	/* Draw Tail */
 	for (int i = 0; i < TailLength; i++)
 	{
-		//TODO: figure out why we need a 2.0f offset to draw tail correctly
 		Tail.setPosition(TailPos[i].X - TailRadius, TailPos[i].Y - TailRadius);
 		Window->draw(Tail);
 	}

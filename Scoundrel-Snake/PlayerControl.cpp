@@ -5,17 +5,18 @@
 PlayerControl::Input PlayerControl::currInput = noAction;
 PlayerControl::Input PlayerControl::prevInput = noAction;
 PlayerControl::Mode PlayerControl::GameMode = Menu;
+IGameObject* PlayerControl::Player = NULL;
 
 PlayerControl::PlayerControl()
 {
 
 }
 
-void PlayerControl::PlayerAction(Snake *snake)
+void PlayerControl::PlayerAction()
 {
 	prevInput = currInput;
 	currInput = getPlayerInput(prevInput);
-	processInput(currInput, snake);
+	processInput(currInput, Player);
 }
 
 // We parse in prevInput in the case that no button is pressed, it will return the last known input
@@ -58,42 +59,46 @@ PlayerControl::Input PlayerControl::getPlayerInput(Input &prevInput)
 	return prevInput;
 }
 
-void PlayerControl::processInput(Input input, Snake *snake)
+void PlayerControl::processInput(Input input, IGameObject *player)
 {
 	if (input == noAction)
 		return;
 
 	if (GameMode == InGame)
 	{
-		if (snake != NULL)
+		if (player != NULL)
 		{
-			snake->LastPos = snake->Pos;
-			snake->UpdateHeadTexture(input);
-			if (input == Up) snake->Pos.Y -= snake->Speed;
-			if (input == Right) snake->Pos.X += snake->Speed;
-			if (input == Down) snake->Pos.Y += snake->Speed;
-			if (input == Left) snake->Pos.X -= snake->Speed;
+			Point pos = player->GetPosition();
+			double speed = player->GetSpeed();
+			player->SetLastPosition(pos);
+
+			if (input == Up) pos.Y -= speed;
+			if (input == Right) pos.X += speed;
+			if (input == Down) pos.Y += speed;
+			if (input == Left) pos.X -= speed;
 			if (input == UpRight)
 			{
-				snake->Pos.Y -= 0.71f*snake->Speed;
-				snake->Pos.X += 0.71f*snake->Speed;
+				pos.Y -= 0.71f*speed;
+				pos.X += 0.71f*speed;
 			}
 			if (input == DownRight)
 			{
-				snake->Pos.Y += 0.71f*snake->Speed;
-				snake->Pos.X += 0.71f*snake->Speed;
+				pos.Y += 0.71f*speed;
+				pos.X += 0.71f*speed;
 			}
 			if (input == DownLeft)
 			{
-				snake->Pos.Y += 0.71f*snake->Speed;
-				snake->Pos.X -= 0.71f*snake->Speed;
+				pos.Y += 0.71f*speed;
+				pos.X -= 0.71f*speed;
 			}
 			if (input == UpLeft)
 			{
-				snake->Pos.Y -= 0.71f*snake->Speed;
-				snake->Pos.X -= 0.71f*snake->Speed;
+				pos.Y -= 0.71f*speed;
+				pos.X -= 0.71f*speed;
 			}
-			snake->UpdateTail();
+
+			player->SetPosition(pos);
+			player->Update(input);
 		}
 	}
 

@@ -16,7 +16,17 @@ class Rat : public IGameObject, public IDrawable
 		Rat(sf::RenderWindow *renderWindow, float x, float y, float speed);
 		~Rat() {};
 
-		Point Position() override;
+		/* Base Class Implementations*/
+		Point GetPosition() override;
+		Point GetLastPosition() override;
+		double GetSpeed() override;
+
+		bool SetPosition(Point pos) override;
+		bool SetLastPosition(Point pos) override;
+		bool SetSpeed(double speed) override;
+
+		bool Update(int input) override;
+
 		sf::RenderWindow *Window;
         Point Pos;
 		Point LastPos;

@@ -25,16 +25,13 @@ void Menu(sf::RenderWindow *Window, GameDirector *Game)
 
 }
 
-void PlayerTurn(sf::RenderWindow *Window, GameDirector *Game, Snake *s)
+void PlayerTurn(sf::RenderWindow *Window, GameDirector *Game)
 {
-	PlayerControl::PlayerAction(s);
+	PlayerControl::PlayerAction();
 
 	if (PlayerControl::prevInput == PlayerControl::Respawn)
 	{
-		if (s == NULL)
-		{
-			Game->CreateSnake(Window, 10, 10);
-		}
+		PlayerControl::Player = Game->CreateSnake(Window, 10, 10);
 	}
 }
 
@@ -55,16 +52,16 @@ int main()
 	GameDirector *Game = new GameDirector();
 	GraphicsFactory *Graphics = new GraphicsFactory(windowSize.x, windowSize.y, border_width);
 	Graphics->Initialise();
-
-	Snake *s = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
-
-	IMap* CurrentMap = new Dojo(&Window, Game, s);
+	
+	PlayerControl::Player = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
+	IMap* CurrentMap = new Dojo(&Window, Game, PlayerControl::Player);
 	CurrentMap->Load();
 	PlayerControl::GameMode = PlayerControl::InGame;
+	
 
 	while (Window.isOpen())
 	{
-		PlayerTurn(&Window, Game, s);
+		PlayerTurn(&Window, Game);
 		Game->GameTurn();
 		CurrentMap->Upkeep();
 

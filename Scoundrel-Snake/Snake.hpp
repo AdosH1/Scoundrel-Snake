@@ -2,6 +2,7 @@
 
 #include <deque>
 #include "SFML/Graphics.hpp"
+#include "GraphicsFactory.hpp"
 #include "IDrawable.hpp"
 #include "IGameObject.hpp"
 #include "../Utility/Point.hpp"
@@ -12,8 +13,18 @@ class Snake : public IDrawable, public IGameObject
 		/* The window this object belongs to */
 		sf::RenderWindow *Window;
 
+		/* Base Class Implementations*/
+		Point GetPosition() override;
+		Point GetLastPosition() override;
+		double GetSpeed() override;
+
+		bool SetPosition(Point pos) override;
+		bool SetLastPosition(Point pos) override;
+		bool SetSpeed(double speed) override;
+
+		bool Update(int input) override;
+
 		/* Current head position */
-		Point Position() override;
         Point Pos;
 		const double HeadRadius = 8;
 		const double TailRadius = 5;

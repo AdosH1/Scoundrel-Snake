@@ -240,8 +240,6 @@ void GameDirector::RemoveDrawObject(IDrawable *object)
 
 void GameDirector::Reset()
 {
-	GameOver = true;
-
 	ForegroundDrawObjects.clear();
 	MiddlegroundDrawObjects.clear();
 	BackgroundDrawObjects.clear();

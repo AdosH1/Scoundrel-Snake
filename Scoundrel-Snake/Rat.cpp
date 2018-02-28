@@ -32,9 +32,42 @@ Rat::Rat(sf::RenderWindow *renderWindow, float x, float y, float speed)
 }
 #pragma endregion 
 
-Point Rat::Position()
+Point Rat::GetPosition()
 {
 	return Pos;
+}
+
+Point Rat::GetLastPosition()
+{
+	return LastPos;
+}
+
+double Rat::GetSpeed()
+{
+	return Speed;
+}
+
+bool Rat::SetPosition(Point pos)
+{
+	Pos = pos;
+	return true;
+}
+
+bool Rat::SetLastPosition(Point pos)
+{
+	LastPos = pos;
+	return true;
+}
+
+bool Rat::SetSpeed(double speed)
+{
+	Speed = speed;
+	return true;
+}
+
+bool Rat::Update(int input = NULL)
+{
+	return false;
 }
 
 
