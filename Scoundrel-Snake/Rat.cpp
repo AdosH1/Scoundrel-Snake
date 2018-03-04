@@ -47,6 +47,17 @@ double Rat::GetSpeed()
 	return Speed;
 }
 
+bool Rat::GetDispose()
+{
+	return Dispose;
+}
+
+bool Rat::SetDispose(bool dispose)
+{
+	Dispose = dispose;
+	return true;
+}
+
 bool Rat::SetPosition(Point pos)
 {
 	Pos = pos;

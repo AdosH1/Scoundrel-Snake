@@ -77,6 +77,18 @@ double Snake::GetSpeed()
 	return Speed;
 }
 
+bool Snake::GetDispose()
+{
+	return Dispose;
+}
+
+bool Snake::SetDispose(bool dispose)
+{
+	Dispose = dispose;
+	return true;
+}
+
+
 bool Snake::SetPosition(Point pos)
 {
 	Pos = pos;

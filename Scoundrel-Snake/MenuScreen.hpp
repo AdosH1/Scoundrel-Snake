@@ -3,11 +3,11 @@
 #include "GameDirector.hpp"
 #include "PlayerControl.hpp"
 #include "Dojo.hpp"
+#include "Placeholder.hpp"
 
 class MenuScreen : public IMap
 {
 public:
-	//MenuScreen(sf::RenderWindow* window, GameDirector* game, IGameObject* player);
 	MenuScreen();
 	~MenuScreen();
 

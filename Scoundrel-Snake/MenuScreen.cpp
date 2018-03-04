@@ -5,14 +5,6 @@ MenuScreen::MenuScreen()
 {
 	
 }
-//MenuScreen::MenuScreen(sf::RenderWindow* window, GameDirector* game, IGameObject* player)
-//{
-//	Window = window;
-//	Game = game;
-//	Player = player;
-//	MapSize = Rectangle(Point(0, 0), Point(600, 600));
-//	Option = Play;
-//}
 
 MenuScreen::~MenuScreen()
 {
@@ -49,6 +41,8 @@ void MenuScreen::Load()
 	Rectangle selectRect = Rectangle(0, 0, 25, 25);
 	selector = Game->CreateGhostRectangle(Window, selectRect, GraphicsFactory::pSelectorTexture, Game->Foreground, "Selector");
 	selector->Geo.MoveCenterTo(Point(80, 370));
+
+	PlayerControl::Player = new Placeholder();
 }
 
 bool MenuScreen::GetChange()

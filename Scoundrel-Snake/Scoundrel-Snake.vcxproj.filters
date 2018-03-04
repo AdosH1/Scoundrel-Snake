@@ -72,6 +72,9 @@
     <ClCompile Include="MenuScreen.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
+    <ClCompile Include="Placeholder.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsFactory.hpp">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="MenuScreen.hpp">
       <Filter>Header Files\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Placeholder.hpp">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

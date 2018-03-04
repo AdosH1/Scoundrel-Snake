@@ -127,6 +127,7 @@
     <ClCompile Include="GraphicsFactory.cpp" />
     <ClCompile Include="Dojo.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
+    <ClCompile Include="Placeholder.cpp" />
     <ClCompile Include="PlayerControl.cpp" />
     <ClCompile Include="Rat.cpp" />
     <ClCompile Include="Scoundrel Snake.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="IObject.hpp" />
     <ClInclude Include="IMap.hpp" />
     <ClInclude Include="MenuScreen.hpp" />
+    <ClInclude Include="Placeholder.hpp" />
     <ClInclude Include="PlayerControl.hpp" />
     <ClInclude Include="Rat.hpp" />
     <ClInclude Include="Snake.hpp" />

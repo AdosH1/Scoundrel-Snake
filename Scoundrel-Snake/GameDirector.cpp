@@ -132,7 +132,7 @@ void GameDirector::Cleanup()
 	for (std::vector<IGameObject*>::iterator it = CurrentGameObjects.begin(); it < CurrentGameObjects.end(); ++it)
 	{
 		auto object = *it;
-		if (object->Dispose)
+		if (object->GetDispose())
 		{
 			if (IDrawable *obj = dynamic_cast<IDrawable*>(object))
 			{

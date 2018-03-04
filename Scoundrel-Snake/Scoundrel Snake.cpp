@@ -1,7 +1,6 @@
 ////InGame Snake, a reimagining of the classic game snake
 //// By Aden Huen
 //
-// TODO: Snake hit -> Menu Screen, Update IMap to support exit
 #pragma once
 #include <iostream>
 #include <vector>
@@ -55,6 +54,13 @@ int main()
 		Game->GameTurn();
 		CurrentMap->Upkeep();
 
+#pragma region Events
+		if (PlayerControl::Player != NULL && PlayerControl::Player->GetDispose())
+		{
+			CurrentMap = new MenuScreen();
+			CurrentMap->Initialize(&Window, Game, PlayerControl::Player, CurrentMap);
+			CurrentMap->Load();
+		}
 		if (CurrentMap->GetChange())
 		{
 			ChangeMap(&Window, Game, PlayerControl::Player, CurrentMap->GetMap());
@@ -71,10 +77,13 @@ int main()
 				CurrentMap->Load();
 			}
 		}
-		//Draw game objects
+#pragma region endregion 
+
+#pragma region Drawing
 		Window.clear();
 		Game->DrawGameObjects();
 		Window.display();
+#pragma endregion
 
 		//If the window is crossed, exit the window
 		while (Window.pollEvent(event))
