@@ -69,7 +69,7 @@
     <ClCompile Include="Dojo.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
+    <ClCompile Include="MenuScreen.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,7 +113,7 @@
     <ClInclude Include="Dojo.hpp">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.hpp">
+    <ClInclude Include="MenuScreen.hpp">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
   </ItemGroup>

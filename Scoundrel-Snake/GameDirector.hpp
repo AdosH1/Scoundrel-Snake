@@ -11,6 +11,7 @@
 class GameDirector
 {
 public:
+	sf::RenderWindow* Window;
 	bool GameOver;
 	enum DrawLevel { Background = 0, Middleground = 1, Foreground = 2 };
 	std::map<std::string, int> EnemyCount;
@@ -23,7 +24,7 @@ public:
 	std::list<IDrawable*> MiddlegroundDrawObjects;
 	std::list<IDrawable*> BackgroundDrawObjects;
 
-	GameDirector();
+	GameDirector(sf::RenderWindow* window);
 	~GameDirector();
 
 	void AddGameObject(IGameObject *object);
@@ -39,7 +40,6 @@ public:
 	void GameTurn();
 	void Referee();
 	void Cleanup();
-	void PostTurn();
 
 	void LoadMenu(sf::RenderWindow *renderWindow);
 

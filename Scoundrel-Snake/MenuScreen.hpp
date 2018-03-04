@@ -1,26 +1,36 @@
 #pragma once
 #include "IMap.hpp"
-#include "../Utility/Geometry.hpp"
+#include "GameDirector.hpp"
+#include "PlayerControl.hpp"
+#include "Dojo.hpp"
 
-class Dojo : public IMap
+class MenuScreen : public IMap
 {
 public:
-	/*Dojo(sf::RenderWindow* window, GameDirector* game, IGameObject* player);*/
-	Dojo();
-	~Dojo();
+	//MenuScreen(sf::RenderWindow* window, GameDirector* game, IGameObject* player);
+	MenuScreen();
+	~MenuScreen();
 
 	sf::RenderWindow* Window;
 	GameDirector* Game;
 	IGameObject* Player;
 	Rectangle MapSize;
+
+	GhostRectangle* playButton;
+	GhostRectangle* exitButton;
+	GhostRectangle* selector;
+
+	enum MenuOptions { Play = 0, Exit = 1 };
+	MenuOptions Option;
+
 	IMap* CurrentMap;
 	bool ChangeMap = false;
 	bool ExitMap = false;
 
 	void Initialize(sf::RenderWindow* window, GameDirector* game, IGameObject* player, IMap* currentMap) override;
 	void Load() override;
-	bool GetChange() override;
 	IMap* GetMap() override;
 	bool GetExit() override;
+	bool GetChange() override;
 	void Upkeep() override;
 };

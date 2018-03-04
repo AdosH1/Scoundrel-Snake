@@ -126,7 +126,7 @@
     <ClCompile Include="GhostRectangle.cpp" />
     <ClCompile Include="GraphicsFactory.cpp" />
     <ClCompile Include="Dojo.cpp" />
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="PlayerControl.cpp" />
     <ClCompile Include="Rat.cpp" />
     <ClCompile Include="Scoundrel Snake.cpp" />
@@ -143,7 +143,7 @@
     <ClInclude Include="IGameObject.hpp" />
     <ClInclude Include="IObject.hpp" />
     <ClInclude Include="IMap.hpp" />
-    <ClInclude Include="Menu.hpp" />
+    <ClInclude Include="MenuScreen.hpp" />
     <ClInclude Include="PlayerControl.hpp" />
     <ClInclude Include="Rat.hpp" />
     <ClInclude Include="Snake.hpp" />

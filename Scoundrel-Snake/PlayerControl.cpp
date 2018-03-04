@@ -53,8 +53,20 @@ PlayerControl::Input PlayerControl::getPlayerInput(Input &prevInput)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		return prevInput = Left;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		return prevInput = Respawn;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		return prevInput = Up;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		return prevInput = Down;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		return prevInput = Left;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		return prevInput = Right;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+		return prevInput = Enter;
 
 	return prevInput;
 }
@@ -100,6 +112,11 @@ void PlayerControl::processInput(Input input, IGameObject *player)
 			player->SetPosition(pos);
 			player->Update(input);
 		}
+	}
+
+	if (GameMode == Menu)
+	{
+		
 	}
 
 	/* TODO: Remember to add GameOver mechanic */

@@ -17,7 +17,7 @@ class PlayerControl
 			DownLeft,
 			UpLeft,
 			Exit,
-			Respawn
+			Enter
 		};
 
 		enum Mode

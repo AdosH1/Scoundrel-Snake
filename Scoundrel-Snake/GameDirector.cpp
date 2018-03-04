@@ -3,8 +3,9 @@
 #include "../Utility/Geometry.hpp"
 #include "GraphicsFactory.hpp"
 
-GameDirector::GameDirector()
+GameDirector::GameDirector(sf::RenderWindow* window)
 {
+	Window = window;
 	GameOver = true;
 	CurrentDrawObjects.push_back(&BackgroundDrawObjects);
 	CurrentDrawObjects.push_back(&MiddlegroundDrawObjects);
@@ -223,8 +224,8 @@ void GameDirector::Remove(IObject *object)
 		BackgroundDrawObjects.remove(obj);
 	}
 
-	delete object;
-	//object = NULL;
+	//delete object;
+	object = NULL;
 }
 
 void GameDirector::RemoveGameObject(IGameObject *object)
@@ -240,6 +241,12 @@ void GameDirector::RemoveDrawObject(IDrawable *object)
 
 void GameDirector::Reset()
 {
+	EnemyCount = std::map<std::string, int>();
+	for (IObject* obj : CurrentGameObjects)
+	{
+		Remove(obj);
+	}
+
 	ForegroundDrawObjects.clear();
 	MiddlegroundDrawObjects.clear();
 	BackgroundDrawObjects.clear();
