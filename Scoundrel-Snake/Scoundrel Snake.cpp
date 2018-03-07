@@ -42,8 +42,8 @@ int main()
 	GameDirector *Game = new GameDirector(&Window);
 	GraphicsFactory *Graphics = new GraphicsFactory(windowSize.x, windowSize.y, border_width);
 	Graphics->Initialise();
+	Score::Initialize();
 	
-	//PlayerControl::Player = Game->CreateSnake(&Window, 50, 50, GameDirector::Middleground);
 	IMap* CurrentMap = new MenuScreen();
 	CurrentMap->Initialize(&Window, Game, PlayerControl::Player, CurrentMap);
 	CurrentMap->Load();
@@ -63,6 +63,7 @@ int main()
 		}
 		if (CurrentMap->GetChange())
 		{
+			Score::Reset();
 			ChangeMap(&Window, Game, PlayerControl::Player, CurrentMap->GetMap());
 			CurrentMap = CurrentMap->GetMap();
 		}
@@ -82,6 +83,7 @@ int main()
 #pragma region Drawing
 		Window.clear();
 		Game->DrawGameObjects();
+		Window.draw(*Score::Text);
 		Window.display();
 #pragma endregion
 

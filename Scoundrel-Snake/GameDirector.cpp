@@ -40,7 +40,6 @@ void GameDirector::DrawGameObjects()
 
 		}
 	}
-	
 }
 
 void GameDirector::Referee()
@@ -70,6 +69,7 @@ void GameDirector::Referee()
 					{
 						rat->Dispose = true;
 						EnemyCount["Rat"] -= 1;
+						Score::AddScore(1);
 						//snake->Lengthen(15);
 						SnakeAteRat = true;
 					}

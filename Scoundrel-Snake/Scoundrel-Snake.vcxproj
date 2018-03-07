@@ -130,6 +130,7 @@
     <ClCompile Include="Placeholder.cpp" />
     <ClCompile Include="PlayerControl.cpp" />
     <ClCompile Include="Rat.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Scoundrel Snake.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Placeholder.hpp" />
     <ClInclude Include="PlayerControl.hpp" />
     <ClInclude Include="Rat.hpp" />
+    <ClInclude Include="Score.hpp" />
     <ClInclude Include="Snake.hpp" />
     <ClInclude Include="Wall.hpp" />
   </ItemGroup>

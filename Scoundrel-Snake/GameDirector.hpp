@@ -7,6 +7,7 @@
 #include <vector>
 #include "Wall.hpp"
 #include "GhostRectangle.hpp"
+#include "Score.hpp"
 
 class GameDirector
 {
