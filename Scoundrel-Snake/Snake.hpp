@@ -38,6 +38,7 @@ class Snake : public IDrawable, public IGameObject
         float Speed;
 	    /* The number of tail segments the snake will have */
         int TailLength;
+		bool HitWall = false;
 
 		sf::CircleShape Head;
 		sf::CircleShape Tail;
@@ -56,7 +57,7 @@ class Snake : public IDrawable, public IGameObject
 
     private:
 		/* The distance between each tail segment (in pixels (roughly) ) */
-		const int TailSegmentDistance = 2;
+		const int TailSegmentDistance = 1;
 		int TailSegmentCounter = 0;
 
 

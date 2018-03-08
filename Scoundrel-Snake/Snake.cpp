@@ -9,8 +9,8 @@ Snake::Snake(sf::RenderWindow *renderWindow, float x, float y)
 
 	Pos.X = x;
 	Pos.Y = y;
-	Speed = 4;
-	TailLength = 6;
+	Speed = 6;
+	TailLength = 4;
 
 	for (int i = 0; i < TailLength; ++i) 
 	{
@@ -123,7 +123,6 @@ void Snake::Draw()
 		Window->draw(Tail);
 	}
 
-
 	/* Draw Head */
 	Head.setPosition(Pos.X - HeadRadius, Pos.Y - HeadRadius);
 	Window->draw(Head);
@@ -173,12 +172,13 @@ void Snake::Lengthen(int length)
     for (int i = 0; i < length; ++i) {
         TailPos.push_back(pos);
     }
+	TailLength += length;
 }
 
 // Checks collision of the head with the tail
 bool Snake::TailHitByHead()
 {
-    for (int i = 18; i < TailPos.size(); i++)
+    for (int i = 8; i < TailPos.size(); i++)
     {
         float distance = sqrt(pow(TailPos.at(i).X - Pos.X, 2) + pow(TailPos.at(i).Y - Pos.Y, 2));
         if (distance < (HeadRadius + TailRadius)) return true;
@@ -190,9 +190,17 @@ void Snake::UpdateTail()
 {
 	if (TailSegmentCounter >= TailSegmentDistance)
 	{
-		TailPos.pop_back();
-		TailPos.push_front(Pos);
-		TailSegmentCounter = 0;
+		if (HitWall)
+		{
+			TailSegmentCounter++;
+			HitWall = false;
+		}
+		else
+		{
+			TailPos.pop_back();
+			TailPos.push_front(Pos);
+			TailSegmentCounter = 0;
+		}
 	}
 	else TailSegmentCounter++;
 }

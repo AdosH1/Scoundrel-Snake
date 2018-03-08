@@ -21,4 +21,8 @@ public:
 	Point operator*(const Point& p);
 	Point operator/(const Point& p);
 
+	//Point operator=(const Point& p);
+	//bool operator==(const Point& p);
+	//bool operator!=(const Point& p);
+
 };

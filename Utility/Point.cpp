@@ -92,3 +92,22 @@ Point Point::operator/(const Point& p)
 
 	return pt;
 }
+
+//Point Point::operator=(const Point& p)
+//{
+//	Point pt;
+//	pt.X = p.X;
+//	pt.Y = p.Y;
+//
+//	return pt;
+//}
+//
+//bool Point::operator==(const Point& p)
+//{
+//	return (X == p.X && Y == p.Y);
+//}
+//
+//bool Point::operator!=(const Point& p)
+//{
+//	return !(X == p.X && Y == p.Y);
+//}

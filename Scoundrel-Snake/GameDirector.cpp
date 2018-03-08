@@ -57,7 +57,13 @@ void GameDirector::Referee()
 				if (Wall *wall = dynamic_cast<Wall*>(env))
 				{
 					if (Geometry::ContactCircleAndRectangle(snake->Pos, snake->HeadRadius, wall->Geo))
+					{
 						snake->Pos = snake->LastPos;
+						/*snake->Pos.X = (snake->LastPos.X + snake->Pos.X) / 2;
+						snake->Pos.Y = (snake->LastPos.Y + snake->Pos.Y) / 2;*/
+						snake->TailPos.at(0) = snake->LastPos;
+						snake->HitWall = true;
+					}
 				}
 			}
 			for (IGameObject *object : CurrentGameObjects)
@@ -70,10 +76,14 @@ void GameDirector::Referee()
 						rat->Dispose = true;
 						EnemyCount["Rat"] -= 1;
 						Score::AddScore(1);
-						//snake->Lengthen(15);
+						snake->Lengthen(1);
 						SnakeAteRat = true;
 					}
 				}
+			}
+			if (snake->TailHitByHead())
+			{
+				snake->Dispose = true;
 			}
 			continue; //if cast, it won't be anything else
 		}
