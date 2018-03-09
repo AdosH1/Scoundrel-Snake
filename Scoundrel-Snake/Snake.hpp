@@ -15,6 +15,7 @@ class Snake : public IDrawable, public IGameObject
 
 		/* Base Class Implementations*/
 		Point GetPosition() override;
+		std::deque<Point> GetPositionList() override;
 		Point GetLastPosition() override;
 		double GetSpeed() override;
 		bool GetDispose() override;

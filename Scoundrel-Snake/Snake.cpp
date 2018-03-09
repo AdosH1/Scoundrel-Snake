@@ -67,6 +67,11 @@ Point Snake::GetPosition()
 	return Pos;
 }
 
+std::deque<Point> Snake::GetPositionList()
+{
+	return TailPos;
+}
+
 Point Snake::GetLastPosition()
 {
 	return LastPos;
@@ -178,7 +183,7 @@ void Snake::Lengthen(int length)
 // Checks collision of the head with the tail
 bool Snake::TailHitByHead()
 {
-    for (int i = 8; i < TailPos.size(); i++)
+    for (int i = 6; i < TailPos.size(); i++)
     {
         float distance = sqrt(pow(TailPos.at(i).X - Pos.X, 2) + pow(TailPos.at(i).Y - Pos.Y, 2));
         if (distance < (HeadRadius + TailRadius)) return true;

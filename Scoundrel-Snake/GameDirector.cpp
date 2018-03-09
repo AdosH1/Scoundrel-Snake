@@ -58,9 +58,8 @@ void GameDirector::Referee()
 				{
 					if (Geometry::ContactCircleAndRectangle(snake->Pos, snake->HeadRadius, wall->Geo))
 					{
-						snake->Pos = snake->LastPos;
-						/*snake->Pos.X = (snake->LastPos.X + snake->Pos.X) / 2;
-						snake->Pos.Y = (snake->LastPos.Y + snake->Pos.Y) / 2;*/
+						//snake->Pos = snake->LastPos;
+						snake->Pos = Geometry::SetCircleToRectangle(Circle(snake->LastPos, snake->HeadRadius), wall->Geo, true);
 						snake->TailPos.at(0) = snake->LastPos;
 						snake->HitWall = true;
 					}
@@ -77,13 +76,14 @@ void GameDirector::Referee()
 						EnemyCount["Rat"] -= 1;
 						Score::AddScore(1);
 						snake->Lengthen(1);
-						SnakeAteRat = true;
+						std::cout << "Snake hit rat" << std::endl;
 					}
 				}
 			}
 			if (snake->TailHitByHead())
 			{
 				snake->Dispose = true;
+				std::cout << "Snake hit tail" << std::endl;
 			}
 			continue; //if cast, it won't be anything else
 		}
@@ -92,6 +92,7 @@ void GameDirector::Referee()
 		#pragma region Rat
 		if (Rat *rat = dynamic_cast<Rat*>(object))
 		{
+			if (rat->Dispose) continue;
 			for (int i = 0; i < CurrentEnvironmentObjects.size(); i++)
 			{
 				IEnvironmentObject* env = CurrentEnvironmentObjects.at(i);
@@ -108,12 +109,12 @@ void GameDirector::Referee()
 				// If Rat hits Snake tail
 				if (Snake *snake = dynamic_cast<Snake*>(object))
 				{
-					if (SnakeAteRat) continue;
-					for (int i = 0; i < snake->TailPos.size(); i++)
+					for (int i = 2; i < snake->TailPos.size(); i++)
 					{
 						if (Geometry::ContactCircleAndCircle(rat->Pos, rat->HeadRadius, snake->TailPos.at(i), snake->TailRadius))
 						{
 							snake->Dispose = true;
+							std::cout << "Rat hits Snake" << std::endl;
 						}
 					}
 				}

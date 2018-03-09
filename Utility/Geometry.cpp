@@ -41,6 +41,34 @@ Point Geometry::RandomPointWithinRectangleAwayFromPoint(Rectangle rect, Point aw
 	return Point(x, y);
 }
 
+Point Geometry::RandomPointWithinRectangleAwayFromListOfPoints(Rectangle rect, std::deque<Point> listOfPoints, double distanceXY)
+{
+	distanceXY = abs(distanceXY);
+	double x;
+	double y;
+	rect.Max.X -= rect.Min.X;
+	rect.Max.Y -= rect.Min.Y;
+	int length = listOfPoints.size();
+	bool found = false;
+	bool fail = false;
+
+	while (!found)
+	{
+		fail = false;
+		x = rand() % (int)rect.Max.X + (int)rect.Min.X;
+		y = rand() % (int)rect.Max.Y + (int)rect.Min.Y;
+
+		for (int i = 0; i < length; i++)
+		{
+			Point p = listOfPoints.at(i);
+			if (abs(p.X - x) > distanceXY || abs(p.Y - y) > distanceXY) continue;
+			fail = true;
+		}
+		if (!fail) found = true;
+	}
+	return Point(x, y);
+}
+
 Point Geometry::PointDifference(Point p1, Point p2)
 {
 	Point p3 = p1 - p2;
@@ -173,3 +201,14 @@ bool Geometry::ContactRectangleAndRectangle(Rectangle r1, Rectangle r2)
 	return false;
 }
 #pragma endregion 
+
+Point Geometry::SetCircleToRectangle(Circle circle, Rectangle rect, bool leaveGap)
+{
+	if (leaveGap) circle.Radius = circle.Radius * 1.05;
+	if (circle.Center.X + circle.Radius < rect.Min.X) circle.Center.X = rect.Min.X - circle.Radius;
+	if (circle.Center.Y + circle.Radius < rect.Min.Y) circle.Center.Y = rect.Min.Y - circle.Radius;
+	if (circle.Center.X - circle.Radius > rect.Max.X) circle.Center.X = rect.Max.X + circle.Radius;
+	if (circle.Center.Y - circle.Radius > rect.Max.Y) circle.Center.Y = rect.Max.Y + circle.Radius;
+
+	return circle.Center;
+}

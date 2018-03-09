@@ -70,7 +70,8 @@ void Dojo::Upkeep()
 {
 	if (Game->EnemyCount["Rat"] < 2)
 	{
-		Point p = Geometry::RandomPointWithinRectangleAwayFromPoint(MapSize, Player->GetPosition(), 100);
+		//Point p = Geometry::RandomPointWithinRectangleAwayFromPoint(MapSize, Player->GetPosition(), 100);
+		Point p = Geometry::RandomPointWithinRectangleAwayFromListOfPoints(MapSize, Player->GetPositionList(), 100);
 		Game->CreateRat(Window, p.X, p.Y);
 	}
 

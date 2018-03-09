@@ -1,6 +1,7 @@
 #pragma once
 #include "IObject.hpp"
 #include "../Utility/Point.hpp"
+#include <deque>
 
 class IGameObject : public virtual IObject
 {
@@ -24,6 +25,7 @@ public:
 	virtual ~IGameObject() {};
 
 	virtual Point GetPosition() { throw std::exception("GetPosition method not implemented."); };
+	virtual std::deque<Point> GetPositionList() { throw std::exception("GetPositionList method not implemented."); }
 	virtual Point GetLastPosition() { throw std::exception("GetLastPosition method not implemented."); };
 	virtual double GetSpeed() { throw std::exception("GetSpeed method not implemented."); };
 
