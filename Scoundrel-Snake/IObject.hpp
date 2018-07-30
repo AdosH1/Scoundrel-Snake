@@ -7,6 +7,6 @@ public:
 	IObject() {};
 	virtual ~IObject() {};
 
-	virtual bool GetDispose() { throw std::exception("GetDispose method not implemented."); }
-	virtual bool SetDispose(bool dispose = false) { throw std::exception("GetDispose method not implemented."); }
+	virtual bool GetDispose() { return false;/*throw std::exception("GetDispose method not implemented.");*/ }
+	virtual bool SetDispose(bool dispose = false) { return false;/*throw std::exception("GetDispose method not implemented.");*/ }
 };

@@ -68,12 +68,17 @@ class GraphicsFactory
 	sf::Texture RatHeadW;
 	static sf::Texture *pRatHeadW;
 
+	// Cheese
+	sf::Texture Cheese;
+	static sf::Texture *pCheese;
+
     GraphicsFactory(int WindowX, int WindowY, int borderWidth);
 	void Initialise();
     void LoadMenu();
     void LoadBoard();
     void LoadSnake();
     void LoadRat();
+	void LoadItems();
 };
 
 #endif // _GRAPHICSFACTORY_HPP_

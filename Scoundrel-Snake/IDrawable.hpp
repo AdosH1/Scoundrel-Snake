@@ -22,7 +22,7 @@ public:
 	{
 		/* I don't believe the compiler accepts non-overriden virtual functions,
 		 * so this should never trigger. Regardless...  */
-		throw new std::string("Virtual function 'Draw()' not overridden.");
+		/*throw new std::string("Virtual function 'Draw()' not overridden.");*/
 	};
 	virtual ~IDrawable() {};
 };

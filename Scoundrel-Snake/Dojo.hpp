@@ -16,6 +16,7 @@ public:
 	IMap* CurrentMap;
 	bool ChangeMap = false;
 	bool ExitMap = false;
+	int RatsCreated = 0;
 
 	void Initialize(sf::RenderWindow* window, GameDirector* game, IGameObject* player, IMap* currentMap) override;
 	void Load() override;

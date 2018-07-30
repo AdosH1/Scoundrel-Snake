@@ -153,6 +153,7 @@
     <ClInclude Include="Rectangle.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Time.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />

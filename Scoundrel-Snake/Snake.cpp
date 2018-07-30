@@ -180,6 +180,16 @@ void Snake::Lengthen(int length)
 	TailLength += length;
 }
 
+void Snake::Shorten(int length)
+{
+	if (TailLength <= length) return;
+	for (int i = 0; i < length; ++i) {
+		TailPos.pop_back();
+	}
+	TailLength -= length;
+}
+
+
 // Checks collision of the head with the tail
 bool Snake::TailHitByHead()
 {

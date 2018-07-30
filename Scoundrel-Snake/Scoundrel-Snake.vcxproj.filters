@@ -40,6 +40,12 @@
     <Filter Include="Header Files\Maps">
       <UniqueIdentifier>{40af4a35-923c-404e-afad-a0d5bb5dd82d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Items">
+      <UniqueIdentifier>{3725daf0-fc51-40d5-af99-68dd2491f125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{f21bb905-a3b8-4171-9a0f-2861a522bf81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsFactory.cpp">
@@ -77,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheese.cpp">
+      <Filter>Source Files\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Score.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheese.hpp">
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

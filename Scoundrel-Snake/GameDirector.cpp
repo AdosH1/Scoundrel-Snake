@@ -10,8 +10,6 @@ GameDirector::GameDirector(sf::RenderWindow* window)
 	CurrentDrawObjects.push_back(&BackgroundDrawObjects);
 	CurrentDrawObjects.push_back(&MiddlegroundDrawObjects);
 	CurrentDrawObjects.push_back(&ForegroundDrawObjects);
-
-	EnemyCount["Rat"] = 0;
 }
 
 GameDirector::~GameDirector() = default;
@@ -37,6 +35,7 @@ void GameDirector::DrawGameObjects()
 			if (Snake *snake = dynamic_cast<Snake*>(object)) snake->Draw();
 			if (Rat *rat = dynamic_cast<Rat*>(object)) rat->Draw();
 			if (Wall *wall = dynamic_cast<Wall*>(object)) wall->Draw();
+			if (Cheese *cheese = dynamic_cast<Cheese*>(object)) cheese->Draw();
 
 		}
 	}
@@ -73,17 +72,25 @@ void GameDirector::Referee()
 					if(Geometry::ContactCircleAndCircle(snake->Pos, snake->HeadRadius, rat->Pos, rat->HeadRadius))
 					{
 						rat->Dispose = true;
-						EnemyCount["Rat"] -= 1;
-						Score::AddScore(1);
+						ObjectCount["Rat"] -= 1;
+						Score::AddScore(2);
 						snake->Lengthen(1);
-						std::cout << "Snake hit rat" << std::endl;
+					}
+				}
+				if (Cheese *cheese = dynamic_cast<Cheese*>(object))
+				{
+					if (Geometry::ContactCircleAndRectangle(snake->Pos, snake->HeadRadius, cheese->Geo))
+					{
+						cheese->Dispose = true;
+						ObjectCount["Cheese"] -= 1;
+						Score::AddScore(1);
+						snake->Shorten(3);
 					}
 				}
 			}
 			if (snake->TailHitByHead())
 			{
 				snake->Dispose = true;
-				std::cout << "Snake hit tail" << std::endl;
 			}
 			continue; //if cast, it won't be anything else
 		}
@@ -114,7 +121,7 @@ void GameDirector::Referee()
 						if (Geometry::ContactCircleAndCircle(rat->Pos, rat->HeadRadius, snake->TailPos.at(i), snake->TailRadius))
 						{
 							snake->Dispose = true;
-							std::cout << "Rat hits Snake" << std::endl;
+							ObjectCount["Snake"] -= 1;
 						}
 					}
 				}
@@ -161,7 +168,7 @@ Rat* GameDirector::CreateRat(sf::RenderWindow *renderWindow, float x, float y, D
 {
 	Rat *r = new Rat(renderWindow, x, y);
 	CurrentGameObjects.push_back(r);
-	EnemyCount["Rat"] += 1;
+	ObjectCount["Rat"] += 1;
 	
 	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(r);
 	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(r);
@@ -174,6 +181,7 @@ Snake* GameDirector::CreateSnake(sf::RenderWindow *renderWindow, float x, float 
 {
 	Snake *s = new Snake(renderWindow, x, y);
 	CurrentGameObjects.push_back(s);
+	ObjectCount["Snake"] += 1;
 	
 	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(s);
 	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(s);
@@ -186,12 +194,26 @@ Wall* GameDirector::CreateWall(sf::RenderWindow* renderWindow, Rectangle rect, D
 {
 	Wall *w = new Wall(renderWindow, rect);
 	CurrentEnvironmentObjects.push_back(w);
+	ObjectCount["Wall"] += 1;
 	
 	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(w);
 	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(w);
 	if (drawLevel == Background) BackgroundDrawObjects.push_back(w);
 
 	return w;
+}
+
+Cheese* GameDirector::CreateCheese(sf::RenderWindow *renderWindow, float x, float y, DrawLevel drawLevel)
+{
+	Cheese *c = new Cheese(renderWindow, x, y);
+	CurrentGameObjects.push_back(c);
+	ObjectCount["Cheese"] += 1;
+
+	if (drawLevel == Foreground) ForegroundDrawObjects.push_back(c);
+	if (drawLevel == Middleground) MiddlegroundDrawObjects.push_back(c);
+	if (drawLevel == Background) BackgroundDrawObjects.push_back(c);
+
+	return c;
 }
 
 GhostRectangle* GameDirector::CreateGhostRectangle(sf::RenderWindow* renderWindow, Rectangle rect, sf::Texture* texture, DrawLevel drawLevel, std::string name)
@@ -252,7 +274,7 @@ void GameDirector::RemoveDrawObject(IDrawable *object)
 
 void GameDirector::Reset()
 {
-	EnemyCount = std::map<std::string, int>();
+	ObjectCount = std::map<std::string, int>();
 	for (IObject* obj : CurrentGameObjects)
 	{
 		Remove(obj);

@@ -23,7 +23,7 @@
     <ProjectGuid>{C6CC8190-7850-4950-86E5-48B30C9B3577}</ProjectGuid>
     <RootNamespace>ScoundrelSnake</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Core</ProjectName>
+    <ProjectName>Scoundrel-Snake</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -122,6 +122,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cheese.cpp" />
     <ClCompile Include="GameDirector.cpp" />
     <ClCompile Include="GhostRectangle.cpp" />
     <ClCompile Include="GraphicsFactory.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cheese.hpp" />
     <ClInclude Include="Dojo.hpp" />
     <ClInclude Include="GameDirector.hpp" />
     <ClInclude Include="GhostRectangle.hpp" />

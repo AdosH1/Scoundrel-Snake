@@ -53,6 +53,7 @@ class Snake : public IDrawable, public IGameObject
 		void Draw() override;
 		void UpdateHeadTexture(int enumValue);
 		void Lengthen(int length);
+		void Shorten(int length);
 		bool TailHitByHead();
 		void UpdateTail();
 

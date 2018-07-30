@@ -25,6 +25,8 @@ sf::Texture *GraphicsFactory::pRatHeadE;
 sf::Texture *GraphicsFactory::pRatHeadS;
 sf::Texture *GraphicsFactory::pRatHeadW;
 
+sf::Texture *GraphicsFactory::pCheese;
+
 GraphicsFactory::GraphicsFactory(int WindowX, int WindowY, int borderWidth = 12)
 {
     WindowSize.x = WindowX;
@@ -144,12 +146,21 @@ void GraphicsFactory::LoadRat()
 	pRatHeadW->setSmooth(true);
 }
 
+void GraphicsFactory::LoadItems()
+{
+	if (!Cheese.loadFromFile("Resources/Graphics/Cheese.png"))
+		std::cout << "Error loading Cheese texture." << std::endl;
+	pCheese = &Cheese;
+	pCheese->setSmooth(true);
+}
+
 void GraphicsFactory::Initialise()
 {
 	LoadMenu();
 	LoadBoard();
 	LoadSnake();
 	LoadRat();
+	LoadItems();
 }
 
 
